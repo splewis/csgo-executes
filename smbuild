@@ -1,0 +1,18 @@
+Include('csgo-practice-mode')
+
+Plugin(name='executes', source='scripting/executes.sp')
+
+Package(name='executes-base',
+        plugins=[
+        	'executes',
+        	'csutils'
+        ],
+)
+
+Package(name='executes-release',
+        extends=['executes-base'],
+        plugins=Plugins('executes*'),
+        filegroups={
+            '.': ['LICENSE', 'README.md'],
+        },
+)
