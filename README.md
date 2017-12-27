@@ -29,10 +29,10 @@ No default spawns or executes are provided. You must launch the editor and add t
 ``!clearbuffers``: clears any spawn/execute edit buffers
 
 When working on a map, you should:
-1. Add CT spawns. Each has a notion of 'friendliness' to a site. For example, a B site spawn on de_cache should typically have a '5' friendliness to B and a '1' to A. A spawn in mid might have a '3' to each site. This must be accurate for the CT spawn algorithm to work.
-1. Add some basic T spawns. Add them in spots you don't throw nades from.
-1. Start adding the spawns for the smokes/mollies you want. To do this, stand in the spot, go to 'new spawn' in the menu, throw the greande, and save the spawn. The editor will remember the LAST grenade thrown
-1. Start adding executes. You will select a list of 'required' T spawns for the execute (typically these are your set smokes), and 'optional' ones. The execute is only eligible to be picked if all the required spawns can be chosen (so if there are 4 required spawns, there must be at least 4 T's).
+1. **Add CT spawns.** Each has a notion of 'friendliness' to a site. For example, a B site spawn on de_cache should typically have a '5' friendliness to B and a '1' to A. A spawn in mid might have a '3' to each site. This must be accurate for the CT spawn algorithm to work.
+1. **Add some basic T spawns.** Add them in spots you don't throw nades from. Name them in a way you can identify where they are later, e.g. 'B main 1', 'B main 2', etc.
+1. **Start adding the spawns for the smokes/mollies you want.** To do this, stand in the spot, go to 'new spawn' in the menu, throw the greande, and save the spawn. The editor will remember the LAST grenade thrown
+1. **Start adding executes.** You will select a list of 'required' T spawns for the execute (typically these are your set smokes), and 'optional' ones. The execute is only eligible to be picked if all the required spawns can be chosen (so if there are 4 required spawns, there must be at least 4 T's).
 
 Other notes:
 - All spawns have a 'awp friendliness' rating. Spots good for awpers should get a 5, spots very bad should get a 1.
@@ -42,6 +42,11 @@ Other notes:
 - Install [practicemode](https://github.com/splewis/csgo-practice-mode) for a better editing experience so you will have the ``.back`` command, which helps you make sure your nades landed before saving them.
 - The editor can be buggy. Saving the config & reloading them can help if your spawns aren't showing up on the 'add spawns' menu for the execute builder menu.
 - If you don't know how something works, **look at the code**.
+
+Limitations:
+- With csutils, grenades cannot be thrown before when freezetime ends. This makes getting timings right, thus there is extra T freeze added: see ``sm_executes_default_extra_freeze_time``
+- Only 1 set grenade can be thrown from a spawn. This makes certain executes hard (upper executes on nuke, for example), but you can try to compensate by adding the 'flash' flag to T spawns that would typically flash after throwing their smoke/molotov.
+- Molotovs don't spread correctly when automatically thrown: this is a [csutils bug](https://github.com/splewis/csgo-practice-mode/issues/44).
 
 
 ## Contributing
