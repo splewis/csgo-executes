@@ -43,11 +43,6 @@ Other notes:
 - The editor can be buggy. Saving the config & reloading them can help if your spawns aren't showing up on the 'add spawns' menu for the execute builder menu.
 - If you don't know how something works, **look at the code**.
 
-Limitations:
-- With csutils, grenades cannot be thrown before when freezetime ends. This makes getting timings right, thus there is extra T freeze added: see ``sm_executes_default_extra_freeze_time``
-- Only 1 set grenade can be thrown from a spawn. This makes certain executes hard (upper executes on nuke, for example), but you can try to compensate by adding the 'flash' flag to T spawns that would typically flash after throwing their smoke/molotov.
-- Molotovs don't spread correctly when automatically thrown: this is a [csutils bug](https://github.com/splewis/csgo-practice-mode/issues/44).
-
 
 ## Contributing
 
@@ -57,3 +52,12 @@ Limitations:
 - Don't make arbitrary gameplay changes - those should be left out. I am not interesting in debating gameplay decisions. The plugin has an [API](scripting/include/executes.inc) for a reason - leave your other gameplay choices in other plugins. If you need a new native/forward (and you very likely **will**) feel free to add it.
 
 There is a significant amount of bad code and TODOs - 95% of this was written in a few days. Cleaning those problems up is appreciated. Removing the dependency of csutils would be good.
+
+
+#### Known issues and limitations
+
+Limitations:
+- With csutils, grenades cannot be thrown before when freezetime ends. This makes getting timings right, thus there is extra T freeze added: see ``sm_executes_default_extra_freeze_time``
+- Only 1 set grenade can be thrown from a spawn. This makes certain executes hard (upper executes on nuke, for example), but you can try to compensate by adding the 'flash' flag to T spawns that would typically flash after throwing their smoke/molotov.
+- Molotovs don't spread correctly when automatically thrown: this is a [csutils bug](https://github.com/splewis/csgo-practice-mode/issues/44).
+- The sm_executes_enabled cvar doesn't work very well.
