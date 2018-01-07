@@ -228,7 +228,7 @@ Handle g_OnGetSpecialPowers = INVALID_HANDLE;
 public Plugin myinfo = {
     name = "CS:GO Executes",
     author = "splewis",
-    description = "CS:GO Execute practice",
+    description = "Site execute/defense practice",
     version = PLUGIN_VERSION,
     url = "https://github.com/splewis/csgo-executes"
 };
