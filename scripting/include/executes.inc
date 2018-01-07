@@ -27,11 +27,13 @@ enum StratType {
   StratType_ForceBuy = 2,
 };
 
+// Most spawn flags only apply to gun rounds typically.
 #define SPAWNFLAG_MOLOTOV (1 << 0)
-#define SPAWNFLAG_MAG7 (1 << 1)
-#define SPAWNFLAG_ALURKER (1 << 2)
-#define SPAWNFLAG_BLURKER (1 << 3)
+#define SPAWNFLAG_MAG7 (1 << 1)     // CT only
+#define SPAWNFLAG_ALURKER (1 << 2)  // T only
+#define SPAWNFLAG_BLURKER (1 << 3)  // T only
 #define SPAWNFLAG_FLASH (1 << 4)
+#define SPAWNFLAG_SMOKE (1 << 5)
 
 #define SITESTRING(%1) ((%1) == BombsiteA ? "A" : "B")
 #define TEAMSTRING(%1) ((%1) == CS_TEAM_CT ? "CT" : "T")

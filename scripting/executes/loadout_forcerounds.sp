@@ -123,6 +123,18 @@ static void AssignCTNades(int client, int spawn) {
       g_PlayerNades[client] = "i";
     }
   }
+
+  if (HasFlag(spawn, SPAWNFLAG_FLASH && GetRandomFloat() < 0.5)) {
+    AddNade(client, "f");
+  }
+
+  if (HasFlag(spawn, SPAWNFLAG_SMOKE && GetRandomFloat() < 0.5)) {
+    AddNade(client, "s");
+  }
+
+  if (HasFlag(spawn, SPAWNFLAG_MOLOTOV && GetRandomFloat() < 0.5)) {
+    AddNade(client, "i");
+  }
 }
 
 static void AssignT(int client) {

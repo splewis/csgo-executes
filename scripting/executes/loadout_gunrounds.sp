@@ -115,6 +115,18 @@ static void AssignCTNades(int client, int spawn, bool help) {
   if (Chance(0.2)) {
     g_PlayerNades[client] = "";
   }
+
+  if (HasFlag(spawn, SPAWNFLAG_FLASH && GetRandomFloat() < 0.75)) {
+    AddNade(client, "f");
+  }
+
+  if (HasFlag(spawn, SPAWNFLAG_SMOKE && GetRandomFloat() < 0.75)) {
+    AddNade(client, "s");
+  }
+
+  if (HasFlag(spawn, SPAWNFLAG_MOLOTOV && GetRandomFloat() < 0.75)) {
+    AddNade(client, "i");
+  }
 }
 
 static void AssignT(int client, bool hurtT) {
@@ -179,11 +191,17 @@ static void AssignTNades(int client, int spawn, bool hurt) {
       else if (f < 0.9)
         g_PlayerNades[client] = "s";
     }
+  }
 
-    if (HasFlag(spawn, SPAWNFLAG_FLASH)) {
-      if (f < 0.8) {
-        g_PlayerNades[client] = "f";
-      }
+  if (HasFlag(spawn, SPAWNFLAG_FLASH)) {
+    if (f < 0.8) {
+      AddNade(client, "f");
+    }
+  }
+
+  if (!throwingSetNade && HasFlag(spawn, SPAWNFLAG_SMOKE)) {
+    if (f < 0.8) {
+      AddNade(client, "s");
     }
   }
 }

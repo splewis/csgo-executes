@@ -58,3 +58,9 @@ public void GiveUpgradedSecondary(int client, int team) {
     }
   }
 }
+
+public void AddNade(int client, const char[] nade) {
+  if (!StrContains(g_PlayerNades[client], nade)) {
+    StrCat(g_PlayerNades[client], NADE_STRING_LENGTH, nade);
+  }
+}

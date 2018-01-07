@@ -644,11 +644,13 @@ public void GiveEditFlagsMenu(int client) {
   menu.ExitButton = true;
   menu.ExitBackButton = true;
 
-  AddFlag(menu, SPAWNFLAG_MOLOTOV, "molotov", CS_TEAM_T);
+  AddFlag(menu, SPAWNFLAG_MOLOTOV, "molotov");
+  AddFlag(menu, SPAWNFLAG_FLASH, "flash");
+  AddFlag(menu, SPAWNFLAG_SMOKE, "smoke");
+
   AddFlag(menu, SPAWNFLAG_MAG7, "mag7", CS_TEAM_CT);
   AddFlag(menu, SPAWNFLAG_ALURKER, "A lurker", CS_TEAM_T);
   AddFlag(menu, SPAWNFLAG_BLURKER, "B lurker", CS_TEAM_T);
-  AddFlag(menu, SPAWNFLAG_FLASH, "flash", CS_TEAM_T);
 
   menu.Display(client, MENU_TIME_FOREVER);
 }
