@@ -451,8 +451,10 @@ stock void GiveExecuteSpawnsMenu(int client, int menuPosition = -1) {
   menu.ExitBackButton = true;
 
   if (count == 0) {
+    // TODO: there's a bug here where spawns are added, but not available in the editor menus yet.
+    // editor.sp:AddSpawn may be the culprit?
     delete menu;
-    Executes_Message(client, "No more spawns avaliable, add more.");
+    Executes_Message(client, "No spawns avaliable, add more.");
     GiveNewSpawnMenu(client);
   } else {
     if (menuPosition == -1) {
@@ -490,13 +492,11 @@ public int GiveExecuteSpawnsMenuHandler(Menu menu, MenuAction action, int param1
       Executes_MessageToAll("Made spawn \"%s\" optional in execute.", g_SpawnNames[index]);
 
     } else {
+      // optional, make not in use
       int idx = GetSpawnList(false).FindString(id);
       GetSpawnList(false).Erase(idx);
       Executes_MessageToAll("Removed spawn \"%s\" from execute.", g_SpawnNames[index]);
-      // optional, make not in use
     }
-
-    // GetSpawnList(g_EditingTeamRequired).PushString(id);
 
     int menuPosition = GetMenuSelectionPosition();
     GiveExecuteSpawnsMenu(client, menuPosition);

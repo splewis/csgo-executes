@@ -236,6 +236,8 @@ public void AddExecute(int client) {
   g_ExecuteLikelihood[execIndex] = g_EditingExecuteLikelihood;
   strcopy(g_ExecuteForceBombId[execIndex], ID_LENGTH, g_EditingExecuteForceBombId);
 
+  g_ExecuteTSpawnsRequired[execIndex].Clear();
+  g_ExecuteTSpawnsOptional[execIndex].Clear();
   CopyList(g_EditingExecuteTRequired, g_ExecuteTSpawnsRequired[execIndex]);
   CopyList(g_EditingExecuteTOptional, g_ExecuteTSpawnsOptional[execIndex]);
   g_ExecuteStratTypes[execIndex] = g_EditingExecuteStratTypes;
