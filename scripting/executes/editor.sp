@@ -163,7 +163,6 @@ stock void AddSpawn(int client) {
   GetClientEyeAngles(client, g_SpawnAngles[spawnIndex]);
   g_SpawnTeams[spawnIndex] = g_EditingSpawnTeam;
   g_SpawnGrenadeTypes[spawnIndex] = g_EditingSpawnGrenadeType;
-  g_EditingSpawnGrenadeType = GrenadeType_Smoke;
 
   g_SpawnNadePoints[spawnIndex] = g_EditingSpawnNadePoint;
   g_SpawnNadeVelocities[spawnIndex] = g_EditingSpawnNadeVelocity;
@@ -192,6 +191,7 @@ stock void AddSpawn(int client) {
   g_EditingSpawnSite = SpawnSite_Any;
   g_EditingSpawnThrowTime = DEFAULT_THROWTIME;
   g_EditingSpawnFlags = 0;
+  g_EditingSpawnGrenadeType = GrenadeType_None;
 }
 
 public void ClearSpawnBuffers() {

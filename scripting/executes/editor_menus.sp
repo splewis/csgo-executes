@@ -457,8 +457,6 @@ stock void GiveExecuteSpawnsMenu(int client, int menuPosition = -1) {
   menu.ExitBackButton = true;
 
   if (count == 0) {
-    // TODO: there's a bug here where spawns are added, but not available in the editor menus yet.
-    // editor.sp:AddSpawn may be the culprit?
     delete menu;
     Executes_Message(client, "No spawns avaliable, add more.");
     GiveNewSpawnMenu(client);

@@ -118,9 +118,9 @@ bool g_EditingASpawn = false;
 int g_EditingSpawnIndex = -1;
 int g_NextSpawnId = 0;
 
-int g_EditingSpawnTeam;
+int g_EditingSpawnTeam = CS_TEAM_T;
 SpawnSite g_EditingSpawnSite;
-GrenadeType g_EditingSpawnGrenadeType;
+GrenadeType g_EditingSpawnGrenadeType = GrenadeType_None;
 float g_EditingSpawnNadePoint[3];
 float g_EditingSpawnNadeVelocity[3];
 int g_EditingSpawnSiteFriendly[2] = {MIN_FRIENDLINESS, MIN_FRIENDLINESS};
