@@ -130,6 +130,10 @@ static void ReadSpawns(KeyValues spawnsKv) {
 
     g_SpawnDeleted[spawn] = false;
 
+    char excludedList[1024];
+    spawnsKv.GetString("excluded", excludedList, sizeof(excludedList));
+    AddSpawnExclusionsToList(excludedList, g_SpawnExclusionRules[spawn]);
+
     spawn++;
     g_NumSpawns = spawn;
     if (spawn == MAX_SPAWNS) {
@@ -193,6 +197,11 @@ static void WriteSpawns(KeyValues spawnsKv) {
         spawnsKv.SetNum("grenadeThrowTime", g_SpawnGrenadeThrowTimes[spawn]);
       }
     }
+
+    char excludedList[1024];
+    CollapseSpawnExclusionsToString(g_SpawnExclusionRules[spawn], excludedList,
+                                    sizeof(excludedList));
+    spawnsKv.SetString("excluded", excludedList);
 
     spawnsKv.GoBack();
   }
@@ -358,4 +367,23 @@ stock int ReadFriendliness(KeyValues kv, const char[] name, int defaultValue = A
     return MAX_FRIENDLINESS;
   else
     return value;
+}
+
+public int AddSpawnExclusionsToList(const char[] inputString, ArrayList list) {
+  const int maxSpawns = 10;
+  char parts[maxSpawns][ID_LENGTH];
+  int foundSpawns = ExplodeString(inputString, ";", parts, maxSpawns, ID_LENGTH);
+  for (int i = 0; i < foundSpawns; i++) {
+    if (!StrEqual(parts[i], "")) {
+      list.Push(SpawnIdToIndex(parts[i]));
+    }
+  }
+  return foundSpawns;
+}
+
+public void CollapseSpawnExclusionsToString(ArrayList list, char[] output, int len) {
+  for (int i = 0; i < list.Length; i++) {
+    StrCat(output, len, g_SpawnIDs[list.Get(i)]);
+    StrCat(output, len, ";");
+  }
 }

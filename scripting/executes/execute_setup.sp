@@ -544,6 +544,11 @@ static int FindCTSpawn(int minFriendly, int maxFriendly, Bombsite site,
         }
       }
 
+      // Check if any already-select spawns force exclude this one.
+      if (IsSpawnExcluded(i, spawnsTaken)) {
+        continue;
+      }
+
       if (g_SpawnSiteFriendly[i][site] >= minFriendly &&
           g_SpawnSiteFriendly[i][site] <= maxFriendly) {
         AddRepeatedElement(potential, i, g_SpawnLikelihood[i]);
@@ -556,6 +561,7 @@ static int FindCTSpawn(int minFriendly, int maxFriendly, Bombsite site,
     if (minFriendly < MIN_FRIENDLINESS && maxFriendly > MAX_FRIENDLINESS) {
       return -1;
     } else {
+      // Try a wider rannge of spawn friendliness ratings.
       return FindCTSpawn(minFriendly - 1, maxFriendly + 1, site, spawnsTaken);
     }
   } else {
@@ -565,6 +571,20 @@ static int FindCTSpawn(int minFriendly, int maxFriendly, Bombsite site,
     delete potential;
     return choice;
   }
+}
+
+static bool IsSpawnExcluded(int spawn, bool spawnsTaken[MAX_SPAWNS]) {
+  for (int i = 0; i < g_NumSpawns; i++) {
+    if (i != spawn && spawnsTaken[i]) {
+      for (int j = 0; j < g_SpawnExclusionRules[i].Length; j++) {
+        int excludedSpawn = g_SpawnExclusionRules[i].Get(j);
+        if (excludedSpawn == spawn) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
 static int AddPotentialSpawns(ArrayList input, ArrayList output, Bombsite site,

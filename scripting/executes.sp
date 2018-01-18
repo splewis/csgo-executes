@@ -100,8 +100,9 @@ float g_SpawnNadePoints[MAX_SPAWNS][3];
 float g_SpawnNadeVelocities[MAX_SPAWNS][3];
 int g_SpawnSiteFriendly[MAX_SPAWNS][2];  // CT only
 int g_SpawnAwpFriendly[MAX_SPAWNS];
-int g_SpawnBombFriendly[MAX_SPAWNS];  // T only
-int g_SpawnLikelihood[MAX_SPAWNS];    // CT only
+int g_SpawnBombFriendly[MAX_SPAWNS];          // T only
+int g_SpawnLikelihood[MAX_SPAWNS];            // CT only
+ArrayList g_SpawnExclusionRules[MAX_SPAWNS];  // Spawns excluded if this spawn is chosen.
 
 #define DEFAULT_THROWTIME 0
 #define MIN_FRIENDLINESS 1
@@ -331,6 +332,10 @@ public void OnPluginStart() {
   for (int i = 0; i < MAX_EXECUTES; i++) {
     g_ExecuteTSpawnsOptional[i] = new ArrayList(ID_LENGTH);
     g_ExecuteTSpawnsRequired[i] = new ArrayList(ID_LENGTH);
+  }
+
+  for (int i = 0; i < MAX_SPAWNS; i++) {
+    g_SpawnExclusionRules[i] = new ArrayList(ID_LENGTH);
   }
 
   g_AllowAWPCookie = RegClientCookie("executes_awpchoice", "", CookieAccess_Private);

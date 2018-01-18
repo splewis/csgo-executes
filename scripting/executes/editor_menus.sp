@@ -1,4 +1,5 @@
 // TODO: add "close" setting to CT spawn settings
+// TODO: add CT spawn "exclusions" to the editor
 
 stock void GiveEditorMenu(int client, int menuPosition = -1) {
   Menu menu = new Menu(EditorMenuHandler);
