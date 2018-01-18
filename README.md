@@ -5,6 +5,8 @@ csgo-executes
 
 No support beyond this README is provided for this plugin at this time. Do not ask for it unless you're volunteering to contribute. There are many known bugs; please do not report them unless you are submitting a pull request to fix them.
 
+Warning: there's no backwards compatibility guarantees for spawn files yet. Use this at your own risk.
+
 ## Gameplay
 
 The T team setup to execute onto a site with ~40 seconds left and the CT team is typically in a fairly standard setup. Grenades are automatically thrown for the T players and the rounds plays out the way counter-strike plays. The game goes through pistol rounds, forcebuy/lowbuy rounds, then standard gun rounds. Players can use the ``guns`` menu to select some preferences: whether they want to have an AWP, which M4 to use, and what site they prefer to play on the CT side.
