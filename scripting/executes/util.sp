@@ -355,6 +355,15 @@ stock void CopyList(ArrayList list1, ArrayList list2) {
   }
 }
 
+stock int WipeFromList(ArrayList list, const char[] str) {
+  int count = 0;
+  for (int idx = list.FindString(str); idx >= 0; idx = list.FindString(str)) {
+    count++;
+    list.Erase(idx);
+  }
+  return count;
+}
+
 stock void AddRepeatedElement(ArrayList list, int element, int count = 1) {
   for (int i = 0; i < count; i++) {
     list.Push(element);

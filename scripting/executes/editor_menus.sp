@@ -1,6 +1,12 @@
 // TODO: add "close" setting to CT spawn settings
 // TODO: add CT spawn "exclusions" to the editor
 
+enum SpawnStatus {
+  Spawn_Required = 0,
+  Spawn_Optional = 1,
+  Spawn_NotUsed = 2,
+}
+
 stock void GiveEditorMenu(int client, int menuPosition = -1) {
   Menu menu = new Menu(EditorMenuHandler);
   menu.ExitButton = true;
@@ -481,20 +487,17 @@ public int GiveExecuteSpawnsMenuHandler(Menu menu, MenuAction action, int param1
 
     if (useId == 0) {
       // not in use, make required
-      GetSpawnList(true).PushString(id);
+      SetSpawnStatus(id, Spawn_Required, GetSpawnList(true), GetSpawnList(false));
       Executes_MessageToAll("Added spawn \"%s\" to execute.", g_SpawnNames[index]);
 
     } else if (useId == 1) {
       // required, make optional
-      int idx = GetSpawnList(true).FindString(id);
-      GetSpawnList(true).Erase(idx);
-      GetSpawnList(false).PushString(id);
+      SetSpawnStatus(id, Spawn_Optional, GetSpawnList(true), GetSpawnList(false));
       Executes_MessageToAll("Made spawn \"%s\" optional in execute.", g_SpawnNames[index]);
 
     } else {
       // optional, make not in use
-      int idx = GetSpawnList(false).FindString(id);
-      GetSpawnList(false).Erase(idx);
+      SetSpawnStatus(id, Spawn_NotUsed, GetSpawnList(true), GetSpawnList(false));
       Executes_MessageToAll("Removed spawn \"%s\" from execute.", g_SpawnNames[index]);
     }
 
@@ -690,5 +693,23 @@ public int EditFlagsHandler(Menu menu, MenuAction action, int param1, int param2
 
   } else if (action == MenuAction_End) {
     delete menu;
+  }
+}
+
+void SetSpawnStatus(const char[] id, SpawnStatus status, ArrayList req, ArrayList opt) {
+  if (status == Spawn_NotUsed) {
+    WipeFromList(req, id);
+    WipeFromList(opt, id);
+  } else if (status == Spawn_Required) {
+    WipeFromList(opt, id);
+    if (req.FindString(id) < 0) {
+      req.PushString(id);
+    }
+  } else {
+    // optional
+    WipeFromList(req, id);
+    if (opt.FindString(id) < 0) {
+      opt.PushString(id);
+    }
   }
 }
