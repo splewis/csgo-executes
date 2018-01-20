@@ -397,3 +397,15 @@ stock Bombsite GetOtherSite(Bombsite site) {
 stock bool InFreezeTime() {
   return GameRules_GetProp("m_bFreezePeriod") != 0;
 }
+
+stock bool EnforceDirectoryExists(const char[] smPath) {
+  char dir[PLATFORM_MAX_PATH + 1];
+  BuildPath(Path_SM, dir, sizeof(dir), smPath);
+  if (!DirExists(dir)) {
+    if (!CreateDirectory(dir, 511)) {
+      LogError("Failed to create directory %s", dir);
+      return false;
+    }
+  }
+  return true;
+}

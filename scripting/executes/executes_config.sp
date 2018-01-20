@@ -72,6 +72,7 @@ public void WriteMapConfig() {
   }
 
   kv.Rewind();
+  EnforceDirectoryExists("configs/executes");
   kv.ExportToFile(configFile);
   delete kv;
 
