@@ -95,12 +95,6 @@ stock void GiveNewSpawnMenu(int client, int pos = -1) {
 
   AddMenuOption(menu, "team", "Team: %s", TEAMSTRING(g_EditingSpawnTeam));
   if (g_EditingSpawnTeam == CS_TEAM_CT) {
-    char siteString[32] = "any";
-    if (g_EditingSpawnSite == SpawnSite_A)
-      siteString = "A only";
-    else if (g_EditingSpawnSite == SpawnSite_B)
-      siteString = "B only";
-
     AddMenuOption(menu, "a_friendly", "A site friendliness: %d",
                   g_EditingSpawnSiteFriendly[BombsiteA]);
     AddMenuOption(menu, "b_friendly", "B site friendliness: %d",
@@ -178,10 +172,6 @@ public int GiveNewSpawnMenuHandler(Menu menu, MenuAction action, int param1, int
       IncThrowTime();
       GiveNewSpawnMenu(client, pos);
 
-    } else if (StrEqual(choice, "site")) {
-      IncSiteType();
-      GiveNewSpawnMenu(client, pos);
-
     } else if (StrEqual(choice, "flags")) {
       GiveEditFlagsMenu(client);
 
@@ -245,16 +235,6 @@ public void IncThrowTime() {
   g_EditingSpawnThrowTime++;
   if (g_EditingSpawnThrowTime > 5) {
     g_EditingSpawnThrowTime = 0;
-  }
-}
-
-public void IncSiteType() {
-  if (g_EditingSpawnSite == SpawnSite_Any) {
-    g_EditingSpawnSite = SpawnSite_A;
-  } else if (g_EditingSpawnSite == SpawnSite_A) {
-    g_EditingSpawnSite = SpawnSite_B;
-  } else {
-    g_EditingSpawnSite = SpawnSite_Any;
   }
 }
 
@@ -632,7 +612,6 @@ public void EditSpawn(int client, int spawn) {
   g_EditingSpawnBombFriendly = g_SpawnBombFriendly[spawn];
   g_EditingSpawnLikelihood = g_SpawnLikelihood[spawn];
   g_EditingSpawnThrowTime = g_SpawnGrenadeThrowTimes[spawn];
-  g_EditingSpawnSite = g_SpawnSites[spawn];
   g_EditingSpawnFlags = g_SpawnFlags[spawn];
 
   g_EditingASpawn = true;

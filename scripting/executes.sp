@@ -90,7 +90,6 @@ bool g_SpawnDeleted[MAX_SPAWNS];
 float g_SpawnPoints[MAX_SPAWNS][3];
 float g_SpawnAngles[MAX_SPAWNS][3];
 int g_SpawnTeams[MAX_SPAWNS];
-SpawnSite g_SpawnSites[MAX_SPAWNS];
 int g_SpawnFlags[MAX_SPAWNS];
 
 int g_SpawnGrenadeThrowTimes[MAX_SPAWNS];
@@ -118,7 +117,6 @@ int g_EditingSpawnIndex = -1;
 int g_NextSpawnId = 0;
 
 int g_EditingSpawnTeam = CS_TEAM_T;
-SpawnSite g_EditingSpawnSite;
 GrenadeType g_EditingSpawnGrenadeType = GrenadeType_None;
 float g_EditingSpawnNadePoint[3];
 float g_EditingSpawnNadeVelocity[3];
@@ -361,7 +359,6 @@ public void OnMapStart() {
 
   ReadMapConfig();
 
-  g_EditingSpawnSite = SpawnSite_Any;
   g_EditingSpawnThrowTime = DEFAULT_THROWTIME;
   g_EditMode = false;
   ClearEditBuffers();

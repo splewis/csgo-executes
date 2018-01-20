@@ -528,13 +528,7 @@ static int FindCTSpawn(int minFriendly, int maxFriendly, Bombsite site,
   ArrayList potential = new ArrayList();
   for (int i = 0; i < g_NumSpawns; i++) {
     if (!g_SpawnDeleted[i] && g_SpawnTeams[i] == CS_TEAM_CT && !spawnsTaken[i]) {
-      if (g_SpawnSites[i] == SpawnSite_A && site != BombsiteA) {
-        continue;
-      } else if (g_SpawnSites[i] == SpawnSite_B && site != BombsiteB) {
-        continue;
-      }
-
-      // Probabilisticly skip some close spawns on pistol / force rounds
+      // Probabilistically skip some close spawns on pistol / force rounds
       if (g_SpawnAwpFriendly[i] == 1) {
         if (g_SelectedExecuteStrat == StratType_Pistol && Chance(0.7)) {
           continue;

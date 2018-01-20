@@ -104,15 +104,6 @@ static void ReadSpawns(KeyValues spawnsKv) {
     g_SpawnLikelihood[spawn] = ReadFriendliness(spawnsKv, "likelihood");
 
     char buffer[32];
-    spawnsKv.GetString("site", buffer, sizeof(buffer), "any");
-    if (StrEqual(buffer, "A", false)) {
-      g_SpawnSites[spawn] = SpawnSite_A;
-    } else if (StrEqual(buffer, "B", false)) {
-      g_SpawnSites[spawn] = SpawnSite_B;
-    } else {
-      g_SpawnSites[spawn] = SpawnSite_Any;
-    }
-
     spawnsKv.GetString("grenadeType", buffer, sizeof(buffer));
     if (StrEqual(buffer, "smoke")) {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_Smoke;
@@ -169,14 +160,6 @@ static void WriteSpawns(KeyValues spawnsKv) {
       spawnsKv.SetNum("A_friendly", g_SpawnSiteFriendly[spawn][BombsiteA]);
       spawnsKv.SetNum("B_friendly", g_SpawnSiteFriendly[spawn][BombsiteB]);
       spawnsKv.SetNum("likelihood", g_SpawnLikelihood[spawn]);
-
-      char siteBuf[32] = "any";
-      if (g_SpawnSites[spawn] == SpawnSite_A)
-        siteBuf = "A";
-      else if (g_SpawnSites[spawn] == SpawnSite_B)
-        siteBuf = "B";
-
-      spawnsKv.SetString("site", siteBuf);
     } else {
       spawnsKv.SetNum("bomb_friendly", g_SpawnBombFriendly[spawn]);
 

@@ -171,7 +171,6 @@ stock void AddSpawn(int client) {
   g_SpawnBombFriendly[spawnIndex] = g_EditingSpawnBombFriendly;
   g_SpawnLikelihood[spawnIndex] = g_EditingSpawnLikelihood;
   g_SpawnGrenadeThrowTimes[spawnIndex] = g_EditingSpawnThrowTime;
-  g_SpawnSites[spawnIndex] = g_EditingSpawnSite;
   g_SpawnFlags[spawnIndex] = g_EditingSpawnFlags;
 
   g_SpawnDeleted[spawnIndex] = false;
@@ -188,7 +187,6 @@ stock void AddSpawn(int client) {
   }
 
   g_EditingASpawn = false;
-  g_EditingSpawnSite = SpawnSite_Any;
   g_EditingSpawnThrowTime = DEFAULT_THROWTIME;
   g_EditingSpawnFlags = 0;
   g_EditingSpawnGrenadeType = GrenadeType_None;
