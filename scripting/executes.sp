@@ -254,14 +254,16 @@ public void OnPluginStart() {
       CreateConVar("sm_executes_ratio_constant", "0.475", "Ratio constant for team sizes.");
   g_hRoundsToScramble = CreateConVar("sm_executes_scramble_rounds", "5",
                                      "Consecutive CT wins to cause a team scramble.");
-  g_hRoundTime = CreateConVar("sm_executes_round_time", "40", "Round time left in seconds.");
+  g_hRoundTime = CreateConVar("sm_executes_round_time", "40", "Round time in seconds.");
   g_hRoundTimeVariationCvar = CreateConVar("sm_executes_round_time_variation_enabled", "1",
                                            "Whether round time variations are enabled");
   g_AutoScrambleCvar = CreateConVar("sm_executes_auto_scramble", "7",
-                                    "If greater than 0, scrambles every this many rounds");
+                                    "If greater than 0, scrambles teams every this many rounds");
   g_ExtraFreezeTimeCvar = CreateConVar("sm_executes_default_extra_freeze_time", "1.3",
                                        "Default extra freezetime for terroristseach round");
-  g_DisableOtherBombSiteCvar = CreateConVar("sm_executes_disable_other_site", "1", "");
+  g_DisableOtherBombSiteCvar =
+      CreateConVar("sm_executes_disable_other_site", "1",
+                   "Whether the other bombsite for an execute is disabled each round");
 
   HookConVarChange(g_EnabledCvar, EnabledChanged);
 

@@ -34,9 +34,4 @@
 		"#format"		"{1:N}"
 		"en"			"{1} has set the teams to be scrambled next round."
 	}
-	"FailedToPlant"
-	{
-		"#format"		"{1:N}"
-		"en"		"{PURPLE}{1} {NORMAL}failed to plant..."
-	}
 }

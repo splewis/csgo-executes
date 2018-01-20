@@ -1,4 +1,3 @@
-// TODO: add "close" setting to CT spawn settings
 // TODO: add CT spawn "exclusions" to the editor
 
 enum SpawnStatus {
@@ -7,7 +6,8 @@ enum SpawnStatus {
   Spawn_NotUsed = 2,
 }
 
-stock void GiveEditorMenu(int client, int menuPosition = -1) {
+stock void
+GiveEditorMenu(int client, int menuPosition = -1) {
   Menu menu = new Menu(EditorMenuHandler);
   menu.ExitButton = true;
   menu.SetTitle("Executes editor");
