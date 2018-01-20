@@ -101,7 +101,6 @@ static void ReadSpawns(KeyValues spawnsKv) {
     g_SpawnAwpFriendly[spawn] = ReadFriendliness(spawnsKv, "awp_friendly");
     g_SpawnBombFriendly[spawn] = ReadFriendliness(spawnsKv, "bomb_friendly");
     g_SpawnLikelihood[spawn] = ReadFriendliness(spawnsKv, "likelihood");
-    g_SpawnCloseCTPosition[spawn] = spawnsKv.GetNum("close", 0) != 0;
 
     char buffer[32];
     spawnsKv.GetString("site", buffer, sizeof(buffer), "any");
@@ -169,7 +168,6 @@ static void WriteSpawns(KeyValues spawnsKv) {
       spawnsKv.SetNum("A_friendly", g_SpawnSiteFriendly[spawn][BombsiteA]);
       spawnsKv.SetNum("B_friendly", g_SpawnSiteFriendly[spawn][BombsiteB]);
       spawnsKv.SetNum("likelihood", g_SpawnLikelihood[spawn]);
-      spawnsKv.SetNum("close", g_SpawnCloseCTPosition[spawn]);
 
       char siteBuf[32] = "any";
       if (g_SpawnSites[spawn] == SpawnSite_A)

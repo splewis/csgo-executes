@@ -50,7 +50,7 @@ When working on a map, you should:
 1. **Start adding executes.** You will select a list of 'required' T spawns for the execute (typically these are your set smokes), and 'optional' ones. The execute is only eligible to be picked if all the required spawns can be chosen (so if there are 4 required spawns, there must be at least 4 T's).
 
 Other notes:
-- All spawns have a 'awp friendliness' rating. Spots good for awpers should get a 5, spots very bad should get a 1.
+- All spawns have a 'awp friendliness' rating. Spots good for awpers should get a 5, spots very bad should get a 1. TODO: awp friendliness should be renamed something like 'range friendliness'.
 - I don't recommend using the special support for 'lurk' spawns. The feature was never finished.
 - You can set some flags on spawns for some extra flavor, e.g. CT spawns can be marked with a 'mag7' flag so sometimes a CT spawned there will get a mag7. There are several flags for T and CT spawns.
 - Only 1 player should be workiing on the editor at a time. It saves a single buffer for the spawn/execute being edited, not one per player. If multiple players are throwing nades, the buffer will **keep getting overwritten**.

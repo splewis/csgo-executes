@@ -535,7 +535,7 @@ static int FindCTSpawn(int minFriendly, int maxFriendly, Bombsite site,
       }
 
       // Probabilisticly skip some close spawns on pistol / force rounds
-      if (g_SpawnCloseCTPosition[i]) {
+      if (g_SpawnAwpFriendly[i] == 1) {
         if (g_SelectedExecuteStrat == StratType_Pistol && Chance(0.7)) {
           continue;
         }

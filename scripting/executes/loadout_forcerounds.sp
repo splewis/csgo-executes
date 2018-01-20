@@ -62,7 +62,7 @@ static void AssignCT(int client) {
     }
 
     // Alternate distribution for close spawns
-    if (g_SpawnCloseCTPosition[spawn]) {
+    if (g_SpawnAwpFriendly[spawn] <= 2) {
       f = GetRandomFloat();
       if (f < 0.55) {
         g_PlayerPrimary[client] = "weapon_ump45";

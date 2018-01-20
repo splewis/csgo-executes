@@ -91,7 +91,6 @@ float g_SpawnPoints[MAX_SPAWNS][3];
 float g_SpawnAngles[MAX_SPAWNS][3];
 int g_SpawnTeams[MAX_SPAWNS];
 SpawnSite g_SpawnSites[MAX_SPAWNS];
-bool g_SpawnCloseCTPosition[MAX_SPAWNS];
 int g_SpawnFlags[MAX_SPAWNS];
 
 int g_SpawnGrenadeThrowTimes[MAX_SPAWNS];
