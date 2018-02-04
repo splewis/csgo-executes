@@ -641,6 +641,10 @@ public void EndWarmup() {
 }
 
 public Action Command_Drop(int client, const char[] command, int argc) {
+  if (!g_Enabled) {
+    return Plugin_Continue;
+  }
+
   if (!IsPlayer(client)) {
     return Plugin_Continue;
   }
