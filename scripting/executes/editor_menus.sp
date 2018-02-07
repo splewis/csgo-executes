@@ -295,7 +295,6 @@ public int GiveNewExecuteMenuHandler(Menu menu, MenuAction action, int param1, i
     char choice[64];
     GetMenuItem(menu, param2, choice, sizeof(choice));
     if (StrEqual(choice, "finish")) {
-      ThrowEditingNades(float(freezetime), client, false);
       AddExecute(client);
       GiveNewExecuteMenu(client, pos);
 
