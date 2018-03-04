@@ -3,9 +3,9 @@ csgo-executes
 
 [![Build status](http://ci.splewis.net/job/csgo-executes/badge/icon)](http://ci.splewis.net/job/csgo-executes/)
 
-No support beyond this README is provided for this plugin at this time. Do not ask for it unless you're volunteering to contribute. There are many known bugs; please do not report them unless you are submitting a pull request to fix them.
+**Status: Experimental, unsupported.**
 
-Warning: there's no backwards compatibility guarantees for spawn files yet. Use this at your own risk.
+Warning: there's no backwards compatibility guarantees for spawn files yet. Use this at your own risk. Expect bugs and crashes.
 
 ## Gameplay
 
