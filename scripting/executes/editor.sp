@@ -40,7 +40,7 @@ public void ExitEditMode() {
   }
 }
 
-public void CSU_OnThrowGrenade(int client, GrenadeType grenadeType, const float origin[3],
+public void CSU_OnThrowGrenade(int client, int entity, GrenadeType grenadeType, const float origin[3],
                         const float velocity[3]) {
   LogDebug("CSU_OnThrowGrenade %L %d", client, grenadeType);
   if (g_EditMode && CheckCommandAccess(client, "sm_edit", ADMFLAG_CHANGEMAP)) {
