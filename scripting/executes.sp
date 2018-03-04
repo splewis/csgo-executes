@@ -1194,6 +1194,9 @@ public void BreakBreakableEntities() {
   while ((ent = FindEntityByClassname(ent, "func_breakable")) != -1) {
     AcceptEntityInput(ent, "Break");
   }
+  while ((ent = FindEntityByClassname(ent, "func_breakable_surf")) != -1) {
+    AcceptEntityInput(ent, "Break");
+  }
   while ((ent = FindEntityByClassname(ent, "prop_dynamic")) != -1) {
     AcceptEntityInput(ent, "Break");
   }
