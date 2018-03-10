@@ -7,15 +7,15 @@ Package(name='executes-base',
             'executes',
             'csutils',
             'practicemode',
-        ],
-        disabled_plugins=[
-            'practicemode',
         ]
 )
 
 Package(name='executes-release',
         extends=['executes-base'],
         plugins=Plugins('executes*'),
+        disabled_plugins=[
+            'practicemode',
+        ],
         filegroups={
             '.': ['LICENSE', 'README.md'],
         },
