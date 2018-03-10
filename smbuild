@@ -4,9 +4,13 @@ Plugin(name='executes', source='scripting/executes.sp')
 
 Package(name='executes-base',
         plugins=[
-        	'executes',
-        	'csutils'
+            'executes',
+            'csutils',
+            'practicemode',
         ],
+        disabled_plugins=[
+            'practicemode',
+        ]
 )
 
 Package(name='executes-release',
