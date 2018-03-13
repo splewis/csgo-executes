@@ -73,7 +73,9 @@ public void WriteMapConfig() {
 
   kv.Rewind();
   EnforceDirectoryExists("configs/executes");
-  kv.ExportToFile(configFile);
+  if (!kv.ExportToFile(configFile)) {
+    LogError("Failed to write map config to %s", configFile);
+  }
   delete kv;
 
   g_DirtySpawns = false;
