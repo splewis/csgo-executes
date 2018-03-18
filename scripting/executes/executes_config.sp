@@ -93,10 +93,6 @@ static void ReadSpawns(KeyValues spawnsKv) {
     spawnsKv.GetVector("grenadeVelocity", g_SpawnNadeVelocities[spawn], NULL_VECTOR);
 
     g_SpawnGrenadeThrowTimes[spawn] = spawnsKv.GetNum("grenadeThrowTime", DEFAULT_THROWTIME);
-    // if (g_SpawnGrenadeThrowTimes[spawn] < 0 && g_SpawnGrenadeThrowTimes[spawn] != -2) {
-    //   g_SpawnGrenadeThrowTimes[spawn] = -2;
-    // }
-
     g_SpawnFlags[spawn] = spawnsKv.GetNum("flags", 0);
 
     g_SpawnSiteFriendly[spawn][BombsiteA] = ReadFriendliness(spawnsKv, "A_friendly");
@@ -113,7 +109,6 @@ static void ReadSpawns(KeyValues spawnsKv) {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_Flash;
     } else if (StrEqual(buffer, "molotov")) {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_Molotov;
-      g_SpawnGrenadeThrowTimes[spawn] = 0;
     } else {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_None;
     }
