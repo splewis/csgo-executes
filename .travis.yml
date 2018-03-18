@@ -35,6 +35,9 @@ before_script:
     # get pugsetup include
     - wget https://raw.githubusercontent.com/splewis/csgo-pug-setup/master/scripting/include/pugsetup.inc
 
+    # get botmimic include
+    - wget https://raw.githubusercontent.com/peace-maker/botmimic/master/scripting/include/botmimic.inc
+
     - cd ../../../..
 
 script:
