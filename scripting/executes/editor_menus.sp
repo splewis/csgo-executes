@@ -234,7 +234,7 @@ public void ThrowTimeString(int time, char[] buf, int len) {
 public void IncThrowTime() {
   g_EditingSpawnThrowTime++;
   if (g_EditingSpawnThrowTime > 5) {
-    g_EditingSpawnThrowTime = 0;
+    g_EditingSpawnThrowTime = -3;
   }
 }
 
@@ -296,7 +296,7 @@ public int GiveNewExecuteMenuHandler(Menu menu, MenuAction action, int param1, i
     GetMenuItem(menu, param2, choice, sizeof(choice));
     if (StrEqual(choice, "finish")) {
       AddExecute(client);
-      GiveNewExecuteMenu(client, pos);
+      GiveEditorMenu(client);
 
     } else if (StrEqual(choice, "delete")) {
       g_ExecuteDeleted[g_EditingExecuteIndex] = true;
