@@ -19,7 +19,7 @@ When a T team wins a round, the players typically move to CT. The goal is the de
 
 Download the archive from the latest [build](http://ci.splewis.net/job/csgo-executes/lastSuccessfulBuild/) and extract ALL the files to the game server. This includes both the ``executes.smx`` and ``csutils.smx`` plugin files needed.
 
-Note: the ``csutils.smx`` plugin comes from the [practicemode](https://github.com/splewis/csgo-practice-mode) project, and is used to throw the execute grenades via an invisible bot. It's buggy and doesn't let grenades be thrown in freezetime. I'd like to get rid of needing it too.
+Note: the ``csutils.smx`` plugin comes from the [practicemode](https://github.com/splewis/csgo-practice-mode) project, and is used to throw the execute grenades.
 
 #### Configuration
 
@@ -66,12 +66,11 @@ Other notes:
 - Add some useful feature or make the use of plugin better.
 - Don't make arbitrary gameplay changes - those should be left out. I am not interesting in debating gameplay decisions. The plugin has an [API](scripting/include/executes.inc) for a reason - leave your other gameplay choices in other plugins. If you need a new native/forward (and you very likely **will**) feel free to add it.
 
-There is a significant amount of bad code and TODOs - 95% of this was written in a few days. Cleaning those problems up is appreciated. Removing the dependency of csutils would be good.
+There is a significant amount of bad code and TODOs - 95% of this was written in a few days. Cleaning those problems up is appreciated.
 
 
 #### Known issues and limitations
 
-- With csutils, grenades cannot be thrown before when freezetime ends. This makes getting realistic execute timings right hard, thus there is extra T freeze added: see ``sm_executes_default_extra_freeze_time``. The extra freeze time can get specified in each execute keyvalue as well, but this isn't accessible from the editor menus.
 - Only 1 set grenade can be thrown from a spawn. This makes certain executes hard (upper executes on nuke, for example), but you can try to compensate by adding the 'flash' flag to T spawns that would typically flash after throwing their smoke/molotov.
 - Molotovs don't spread correctly when automatically thrown: this is a [csutils bug](https://github.com/splewis/csgo-practice-mode/issues/44).
 - The sm_executes_enabled cvar doesn't work very well.
