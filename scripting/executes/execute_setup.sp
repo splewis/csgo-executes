@@ -172,7 +172,10 @@ public void AssignTSpawns(int tCount, int ctCount, Bombsite site) {
 
     // Fallback if no bomb carriers found.
     if (potentialBombCarriers.Length == 0) {
-      LogError("Falling back to a random T to be bomb carrier");
+      char mapName[PLATFORM_MAX_PATH + 1];
+      GetCleanMapName(mapName, sizeof(mapName));
+      LogError("Falling back to a random T to be bomb carrier: map=%s, execute id=%s, tCount=%d",
+               mapName, g_ExecuteIDs[g_SelectedExecute], tCount);
       for (int client = 1; client <= MaxClients; client++) {
         if (IsPlayer(client) && g_Team[client] == CS_TEAM_T) {
           potentialBombCarriers.Push(client);
