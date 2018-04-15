@@ -1,21 +1,16 @@
-Include('csgo-practice-mode')
-
 Plugin(name='executes', source='scripting/executes.sp')
+Plugin(name='csutils', source='csgo-practice-mode/scripting/csutils.sp')
 
 Package(name='executes-base',
         plugins=[
             'executes',
             'csutils',
-            'practicemode',
         ]
 )
 
 Package(name='executes-release',
         extends=['executes-base'],
         plugins=Plugins('executes*'),
-        disabled_plugins=[
-            'practicemode',
-        ],
         filegroups={
             '.': ['LICENSE', 'README.md'],
         },
