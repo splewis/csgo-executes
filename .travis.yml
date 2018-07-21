@@ -5,7 +5,6 @@ addons:
         - lib32stdc++6  # needed for spcomp
 
 env:
-    - SMVERSION=1.8
     - SMVERSION=1.9
 
 before_script:
@@ -26,7 +25,7 @@ before_script:
 
     # install smlib
     - cd include
-    - git clone https://github.com/splewis/smlib
+    - git clone https://github.com/bcserv/smlib
     - cp -r smlib/scripting/include/* .
 
     # get updater include
