@@ -1,5 +1,5 @@
-int g_iBeamSprite = 0;
-int g_iHaloSprite = 0;
+int g_iBeamSprite;
+int g_iHaloSprite;
 
 public void StartEditMode() {
   g_EditMode = true;

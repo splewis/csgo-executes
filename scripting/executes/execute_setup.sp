@@ -115,7 +115,7 @@ public void SelectRoundLoadouts() {
 public void AssignTSpawns(int tCount, int ctCount, Bombsite site) {
   ArrayList chosenSpawns = new ArrayList();
   ArrayList clients = new ArrayList();
-  for (int i = 1; i <= MAXPLAYERS; i++) {
+  for (int i = 1; i <= MaxClients; i++) {
     if (IsPlayer(i) && g_Team[i] == CS_TEAM_T) {
       clients.Push(i);
     }
@@ -351,7 +351,7 @@ public void AssignCTSpawns(int tCount, int ctCount, Bombsite site) {
 
   ArrayList chosenSpawns = new ArrayList();
   ArrayList clients = new ArrayList();
-  for (int i = 1; i <= MAXPLAYERS; i++) {
+  for (int i = 1; i <= MaxClients; i++) {
     if (IsPlayer(i) && g_Team[i] == CS_TEAM_CT) {
       clients.Push(i);
     }
@@ -737,7 +737,7 @@ public void SetupThrowNade(float timeUntilFreezeEnd, int client, int spawn) {
       time = timeUntilFreezeEnd + 0.01;
     }
 
-    DataPack pack = CreateDataPack();
+    DataPack pack = new DataPack();
     pack.WriteCell(GetClientSerial(client));
     pack.WriteCell(spawn);
     CreateTimer(time, Timer_ThrowNade, pack);

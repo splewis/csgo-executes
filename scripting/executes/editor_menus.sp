@@ -23,9 +23,9 @@ GiveEditorMenu(int client, int menuPosition = -1) {
   AddMenuOption(menu, "clear_edit_buffers", "Clear edit buffers");
 
   if (menuPosition == -1) {
-    DisplayMenu(menu, client, MENU_TIME_FOREVER);
+    menu.Display(client, MENU_TIME_FOREVER);
   } else {
-    DisplayMenuAtItem(menu, client, menuPosition, MENU_TIME_FOREVER);
+    menu.DisplayAt(client, menuPosition, MENU_TIME_FOREVER);
   }
 }
 
@@ -33,7 +33,7 @@ public int EditorMenuHandler(Menu menu, MenuAction action, int param1, int param
   if (action == MenuAction_Select) {
     int client = param1;
     char choice[64];
-    GetMenuItem(menu, param2, choice, sizeof(choice));
+    menu.GetItem(param2, choice, sizeof(choice));
     int menuPosition = GetMenuSelectionPosition();
 
     if (StrEqual(choice, "end_edit")) {
@@ -125,9 +125,9 @@ stock void GiveNewSpawnMenu(int client, int pos = -1) {
   menu.ExitBackButton = true;
 
   if (pos == -1) {
-    DisplayMenu(menu, client, MENU_TIME_FOREVER);
+    menu.Display(client, MENU_TIME_FOREVER);
   } else {
-    DisplayMenuAtItem(menu, client, pos, MENU_TIME_FOREVER);
+    menu.DisplayAt(client, pos, MENU_TIME_FOREVER);
   }
 }
 
@@ -136,7 +136,7 @@ public int GiveNewSpawnMenuHandler(Menu menu, MenuAction action, int param1, int
     int pos = GetMenuSelectionPosition();
     int client = param1;
     char choice[64];
-    GetMenuItem(menu, param2, choice, sizeof(choice));
+    menu.GetItem(param2, choice, sizeof(choice));
     if (StrEqual(choice, "finish")) {
       AddSpawn(client);
       GiveNewSpawnMenu(client, pos);
@@ -280,9 +280,9 @@ stock void GiveNewExecuteMenu(int client, int pos = -1) {
   menu.ExitBackButton = true;
 
   if (pos == -1) {
-    DisplayMenu(menu, client, MENU_TIME_FOREVER);
+    menu.Display(client, MENU_TIME_FOREVER);
   } else {
-    DisplayMenuAtItem(menu, client, pos, MENU_TIME_FOREVER);
+    menu.DisplayAt(client, pos, MENU_TIME_FOREVER);
   }
 }
 
@@ -293,7 +293,7 @@ public int GiveNewExecuteMenuHandler(Menu menu, MenuAction action, int param1, i
 
     int client = param1;
     char choice[64];
-    GetMenuItem(menu, param2, choice, sizeof(choice));
+    menu.GetItem(param2, choice, sizeof(choice));
     if (StrEqual(choice, "finish")) {
       AddExecute(client);
       GiveEditorMenu(client);
@@ -373,13 +373,13 @@ public void GiveForceBombSpawneMenu(int client) {
 
   menu.ExitButton = true;
   menu.ExitBackButton = true;
-  DisplayMenu(menu, client, MENU_TIME_FOREVER);
+  menu.Display(client, MENU_TIME_FOREVER);
 }
 
 public int GiveForceBombSpawneMenuHandler(Menu menu, MenuAction action, int param1, int param2) {
   if (action == MenuAction_Select) {
     int client = param1;
-    GetMenuItem(menu, param2, g_EditingExecuteForceBombId, ID_LENGTH);
+    menu.GetItem(param2, g_EditingExecuteForceBombId, ID_LENGTH);
     GiveNewExecuteMenu(client);
 
   } else if (action == MenuAction_Cancel && param2 == MenuCancel_ExitBack) {
@@ -441,9 +441,9 @@ stock void GiveExecuteSpawnsMenu(int client, int menuPosition = -1) {
     GiveNewSpawnMenu(client);
   } else {
     if (menuPosition == -1) {
-      DisplayMenu(menu, client, MENU_TIME_FOREVER);
+      menu.Display(client, MENU_TIME_FOREVER);
     } else {
-      DisplayMenuAtItem(menu, client, menuPosition, MENU_TIME_FOREVER);
+      menu.DisplayAt(client, menuPosition, MENU_TIME_FOREVER);
     }
   }
 }
@@ -452,7 +452,7 @@ public int GiveExecuteSpawnsMenuHandler(Menu menu, MenuAction action, int param1
   if (action == MenuAction_Select) {
     int client = param1;
     char info[32];
-    GetMenuItem(menu, param2, info, sizeof(info));
+    menu.GetItem(param2, info, sizeof(info));
 
     char useString[2];
     strcopy(useString, sizeof(useString), info);
@@ -510,9 +510,9 @@ stock void GiveExecuteEditMenu(int client, int menuPosition = -1) {
     delete menu;
   } else {
     if (menuPosition == -1) {
-      DisplayMenu(menu, client, MENU_TIME_FOREVER);
+      menu.Display(client, MENU_TIME_FOREVER);
     } else {
-      DisplayMenuAtItem(menu, client, menuPosition, MENU_TIME_FOREVER);
+      menu.DisplayAt(client, menuPosition, MENU_TIME_FOREVER);
     }
   }
 }
@@ -521,7 +521,7 @@ public int GiveExecuteMenuHandler(Menu menu, MenuAction action, int param1, int 
   if (action == MenuAction_Select) {
     int client = param1;
     char id[ID_LENGTH];
-    GetMenuItem(menu, param2, id, sizeof(id));
+    menu.GetItem(param2, id, sizeof(id));
     int execute = ExecuteIdToIndex(id);
 
     g_TempNameBuffer = g_ExecuteNames[execute];
@@ -574,9 +574,9 @@ stock void GiveEditSpawnChoiceMenu(int client, int menuPosition = -1) {
     delete menu;
   } else {
     if (menuPosition == -1) {
-      DisplayMenu(menu, client, MENU_TIME_FOREVER);
+      menu.Display(client, MENU_TIME_FOREVER);
     } else {
-      DisplayMenuAtItem(menu, client, menuPosition, MENU_TIME_FOREVER);
+      menu.DisplayAt(client, menuPosition, MENU_TIME_FOREVER);
     }
   }
 }
@@ -585,7 +585,7 @@ public int GiveEditSpawnChoiceMenuHandler(Menu menu, MenuAction action, int para
   if (action == MenuAction_Select) {
     int client = param1;
     char id[ID_LENGTH];
-    GetMenuItem(menu, param2, id, sizeof(id));
+    menu.GetItem(param2, id, sizeof(id));
     int spawn = SpawnIdToIndex(id);
     EditSpawn(client, spawn);
 
