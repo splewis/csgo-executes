@@ -37,7 +37,7 @@
 #define POINTS_LOSS 5000
 
 bool g_Enabled = true;
-Handle g_SavedCvars = INVALID_HANDLE;
+ArrayList g_SavedCvars;
 
 /** Client variable arrays **/
 int g_SpawnIndices[MAXPLAYERS + 1] = 0;
@@ -47,8 +47,8 @@ int g_Team[MAXPLAYERS + 1] = 0;
 char g_LastItemPickup[MAXPLAYERS + 1][WEAPON_STRING_LENGTH];
 
 /** Queue Handles **/
-Handle g_hWaitingQueue = INVALID_HANDLE;
-Handle g_hRankingQueue = INVALID_HANDLE;
+ArrayList g_hWaitingQueue;
+ArrayList g_hRankingQueue;
 
 /** ConVar handles **/
 ConVar g_EnabledCvar;
@@ -178,18 +178,18 @@ int g_NumT = 0;
 int g_ActivePlayers = 0;
 bool g_RoundSpawnsDecided = false;  // spawns are lazily decided on the first player spawn event
 
-Handle g_SilencedM4Cookie = INVALID_HANDLE;
+Handle g_SilencedM4Cookie = null;
 bool g_SilencedM4[MAXPLAYERS + 1];
 
-Handle g_AllowAWPCookie = INVALID_HANDLE;
+Handle g_AllowAWPCookie = null;
 bool g_AllowAWP[MAXPLAYERS + 1];
 
 // CT
-Handle g_CZCTSideCookie = INVALID_HANDLE;
+Handle g_CZCTSideCookie = null;
 bool g_CZCTSide[MAXPLAYERS + 1];
 
 // T
-Handle g_CZTSideCookie = INVALID_HANDLE;
+Handle g_CZTSideCookie = null;
 bool g_CZTSide[MAXPLAYERS + 1];
 
 SitePref g_SitePreference[MAXPLAYERS + 1];
@@ -200,13 +200,13 @@ int g_BombSiteBIndex;
 bool g_ShowingEditorInformation = true;
 
 /** Forwards **/
-Handle g_hOnGunsCommand = INVALID_HANDLE;
-Handle g_hOnPostRoundEnqueue = INVALID_HANDLE;
-Handle g_hOnPreRoundEnqueue = INVALID_HANDLE;
-Handle g_hOnTeamSizesSet = INVALID_HANDLE;
-Handle g_hOnTeamsSet = INVALID_HANDLE;
-Handle g_OnRoundWon = INVALID_HANDLE;
-Handle g_OnGetSpecialPowers = INVALID_HANDLE;
+Handle g_hOnGunsCommand = null;
+Handle g_hOnPostRoundEnqueue = null;
+Handle g_hOnPreRoundEnqueue = null;
+Handle g_hOnTeamSizesSet = null;
+Handle g_hOnTeamsSet = null;
+Handle g_OnRoundWon = null;
+Handle g_OnGetSpecialPowers = null;
 
 #include "executes/editor.sp"
 #include "executes/editor_commands.sp"
@@ -344,7 +344,7 @@ public void OnPluginStart() {
 }
 
 public void OnPluginEnd() {
-  if (g_SavedCvars != INVALID_HANDLE) {
+  if (g_SavedCvars != null) {
     RestoreCvars(g_SavedCvars, true);
   }
 }
@@ -403,7 +403,7 @@ public int EnabledChanged(Handle cvar, const char[] oldValue, const char[] newVa
   g_Enabled = !StrEqual(newValue, "0");
 
   if (wasEnabled && !g_Enabled) {
-    if (g_SavedCvars != INVALID_HANDLE)
+    if (g_SavedCvars != null)
       RestoreCvars(g_SavedCvars, true);
 
   } else if (!wasEnabled && g_Enabled) {
@@ -424,7 +424,7 @@ public int EnabledChanged(Handle cvar, const char[] oldValue, const char[] newVa
 }
 
 public void ExecConfigs() {
-  if (g_SavedCvars != INVALID_HANDLE) {
+  if (g_SavedCvars != null) {
     CloseCvarStorage(g_SavedCvars);
   }
   g_SavedCvars = ExecuteAndSaveCvars("sourcemod/executes/executes_game.cfg");
