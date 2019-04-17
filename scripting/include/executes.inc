@@ -57,7 +57,7 @@ enum StratType {
  * @param waitingQueue a queue of the players waiting to join (see include/queue.inc)
  * @noreturn
  */
-forward void Executes_OnPreRoundEnqueue(Handle rankingQueue, Handle waitingQueue);
+forward void Executes_OnPreRoundEnqueue(ArrayList rankingQueue, ArrayList waitingQueue);
 
 /**
  * Called after active players have been placed into the priority scoring queue
@@ -68,7 +68,7 @@ forward void Executes_OnPreRoundEnqueue(Handle rankingQueue, Handle waitingQueue
  * @param rankingQueue a priority queue (see include/priorityqueue.inc)
  * @noreturn
  */
-forward void Executes_OnPostRoundEnqueue(Handle rankingQueue);
+forward void Executes_OnPostRoundEnqueue(ArrayList rankingQueue);
 
 /**
  * Called when the team sizes are set for the round.
@@ -133,7 +133,7 @@ native bool Executes_IsInQueue(int client);
  * @param format string message
  * @noreturn
  */
-native void Executes_Message(int client, const char[] format, any:...);
+native void Executes_Message(int client, const char[] format, any ...);
 
 /**
  * Sends a retake formatted message to all clients.
@@ -141,7 +141,7 @@ native void Executes_Message(int client, const char[] format, any:...);
  * @param format string message
  * @noreturn
  */
-native void Executes_MessageToAll(const char[] format, any:...);
+native void Executes_MessageToAll(const char[] format, any ...);
 
 /**
  * Returns the number of terrorists for the current round.

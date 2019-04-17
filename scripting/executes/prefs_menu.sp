@@ -1,18 +1,18 @@
 public void GivePreferencesMenu(int client) {
-  Handle menu = CreateMenu(PreferencesMenuHandler);
+  Menu menu = new Menu(PreferencesMenuHandler);
   char buffer[128];
 
-  SetMenuTitle(menu, "Select weapon preferences");
+  menu.SetTitle("Select weapon preferences");
 
   buffer = "M4 choice: M4A4";
   if (g_SilencedM4[client])
     buffer = "M4 choice: M4A1-S";
-  AddMenuItem(menu, "silenced_m4", buffer);
+  menu.AddItem("silenced_m4", buffer);
 
   buffer = "Allow receiving awps: no";
   if (g_AllowAWP[client])
     buffer = "Allow receiving awps: yes";
-  AddMenuItem(menu, "allow_awp", buffer);
+  menu.AddItem("allow_awp", buffer);
 
   char choice[8];
   switch (g_SitePreference[client]) {
@@ -26,28 +26,28 @@ public void GivePreferencesMenu(int client) {
       choice = "none";
   }
   Format(buffer, sizeof(buffer), "CT site preference: %s", choice);
-  AddMenuItem(menu, "site_pref", buffer);
+  menu.AddItem("site_pref", buffer);
 
   buffer = "CZ/Five-Seven choice: Five-Seven";
   if (g_CZCTSide[client]) {
     buffer = "CZ/Five-Seven choice: CZ";
   }
-  AddMenuItem(menu, "cz_ct", buffer);
+  menu.AddItem("cz_ct", buffer);
 
   buffer = "CZ/Tec9 choice: Tec9";
   if (g_CZTSide[client]) {
     buffer = "CZ/Tec9 choice: CZ";
   }
-  AddMenuItem(menu, "cz_t", buffer);
+  menu.AddItem("cz_t", buffer);
 
-  DisplayMenu(menu, client, 15);
+  menu.Display(client, 15);
 }
 
-public int PreferencesMenuHandler(Handle menu, MenuAction action, int param1, int param2) {
+public int PreferencesMenuHandler(Menu menu, MenuAction action, int param1, int param2) {
   if (action == MenuAction_Select) {
     int client = param1;
     char choice[64];
-    GetMenuItem(menu, param2, choice, sizeof(choice));
+    menu.GetItem(param2, choice, sizeof(choice));
 
     if (StrEqual(choice, "silenced_m4")) {
       g_SilencedM4[client] = !g_SilencedM4[client];

@@ -37,18 +37,18 @@
 #define POINTS_LOSS 5000
 
 bool g_Enabled = true;
-Handle g_SavedCvars = INVALID_HANDLE;
+ArrayList g_SavedCvars;
 
 /** Client variable arrays **/
-int g_SpawnIndices[MAXPLAYERS + 1] = 0;
-int g_RoundPoints[MAXPLAYERS + 1] = 0;
-bool g_PluginTeamSwitch[MAXPLAYERS + 1] = false;
-int g_Team[MAXPLAYERS + 1] = 0;
+int g_SpawnIndices[MAXPLAYERS + 1];
+int g_RoundPoints[MAXPLAYERS + 1];
+bool g_PluginTeamSwitch[MAXPLAYERS + 1];
+int g_Team[MAXPLAYERS + 1];
 char g_LastItemPickup[MAXPLAYERS + 1][WEAPON_STRING_LENGTH];
 
 /** Queue Handles **/
-Handle g_hWaitingQueue = INVALID_HANDLE;
-Handle g_hRankingQueue = INVALID_HANDLE;
+ArrayList g_hWaitingQueue;
+ArrayList g_hRankingQueue;
 
 /** ConVar handles **/
 ConVar g_EnabledCvar;
@@ -66,13 +66,13 @@ ConVar g_DisableOtherBombSiteCvar;
 ConVar g_ExtraFreezeTimeCvar;
 
 /** Editing global variables **/
-bool g_EditMode = false;
-bool g_DirtySpawns = false;  // whether the spawns have been edited since loading from the file
+bool g_EditMode;
+bool g_DirtySpawns;  // whether the spawns have been edited since loading from the file
 
 /** Win-streak data **/
-bool g_ScrambleSignal = false;
-int g_WinStreak = 0;
-int g_RoundCount = 0;
+bool g_ScrambleSignal;
+int g_WinStreak;
+int g_RoundCount;
 
 /** Stored info from the executes config file **/
 #define MAX_SPAWNS 512
@@ -83,7 +83,7 @@ int g_RoundCount = 0;
 
 // Spawn Data
 // For the love of god we need structs...
-int g_NumSpawns = 0;
+int g_NumSpawns;
 char g_SpawnIDs[MAX_SPAWNS][ID_LENGTH];
 char g_SpawnNames[MAX_SPAWNS][SPAWN_NAME_LENGTH];
 bool g_SpawnDeleted[MAX_SPAWNS];
@@ -109,12 +109,12 @@ ArrayList g_SpawnExclusionRules[MAX_SPAWNS];  // Spawns excluded if this spawn i
 
 // Generic name buffer
 char g_TempNameBuffer[128];
-bool g_EditingExecutes = false;  // if true, editing a spawm
+bool g_EditingExecutes;  // if true, editing a spawm
 
 // Buffers for spawn editing
-bool g_EditingASpawn = false;
+bool g_EditingASpawn;
 int g_EditingSpawnIndex = -1;
-int g_NextSpawnId = 0;
+int g_NextSpawnId;
 
 int g_EditingSpawnTeam = CS_TEAM_T;
 GrenadeType g_EditingSpawnGrenadeType = GrenadeType_None;
@@ -128,10 +128,10 @@ int g_EditingSpawnThrowTime;
 int g_EditingSpawnFlags;
 
 // Execute data
-int g_SelectedExecute = 0;
+int g_SelectedExecute;
 StratType g_SelectedExecuteStrat;
 
-int g_NumExecutes = 0;
+int g_NumExecutes;
 char g_ExecuteIDs[MAX_EXECUTES][ID_LENGTH];
 char g_ExecuteNames[MAX_EXECUTES][EXECUTE_NAME_LENGTH];
 bool g_ExecuteDeleted[MAX_EXECUTES];
@@ -145,13 +145,13 @@ bool g_ExecuteFake[MAX_EXECUTES];
 float g_ExecuteExtraFreezeTime[MAX_EXECUTES];
 
 // Buffers for execute ediitng
-bool g_EditingAnExecute = false;
+bool g_EditingAnExecute;
 int g_EditingExecuteIndex = -1;
 
-int g_NextExecuteId = 0;
+int g_NextExecuteId;
 Bombsite g_EditingExecuteSite = BombsiteA;
-ArrayList g_EditingExecuteTRequired = null;
-ArrayList g_EditingExecuteTOptional = null;
+ArrayList g_EditingExecuteTRequired;
+ArrayList g_EditingExecuteTOptional;
 int g_EditingExecuteLikelihood = AVG_FRIENDLINESS;
 char g_EditingExecuteForceBombId[ID_LENGTH];
 bool g_EditingExecuteStratTypes[3];
@@ -169,44 +169,44 @@ bool g_PlayerKit[MAXPLAYERS + 1];
 
 /** Per-round information about the player setup **/
 int g_LastTeam[MAXPLAYERS + 1];
-int g_RoundStartTime = 0;
+int g_RoundStartTime;
 int g_BombOwner = -1;
 int g_CTAwper = -1;
 int g_TAwper = -1;
-int g_NumCT = 0;
-int g_NumT = 0;
-int g_ActivePlayers = 0;
-bool g_RoundSpawnsDecided = false;  // spawns are lazily decided on the first player spawn event
+int g_NumCT;
+int g_NumT;
+int g_ActivePlayers;
+bool g_RoundSpawnsDecided;  // spawns are lazily decided on the first player spawn event
 
-Handle g_SilencedM4Cookie = INVALID_HANDLE;
+Handle g_SilencedM4Cookie;
 bool g_SilencedM4[MAXPLAYERS + 1];
 
-Handle g_AllowAWPCookie = INVALID_HANDLE;
+Handle g_AllowAWPCookie;
 bool g_AllowAWP[MAXPLAYERS + 1];
 
 // CT
-Handle g_CZCTSideCookie = INVALID_HANDLE;
+Handle g_CZCTSideCookie;
 bool g_CZCTSide[MAXPLAYERS + 1];
 
 // T
-Handle g_CZTSideCookie = INVALID_HANDLE;
+Handle g_CZTSideCookie;
 bool g_CZTSide[MAXPLAYERS + 1];
 
 SitePref g_SitePreference[MAXPLAYERS + 1];
 
-int g_EndWarmupTime = 0;
+int g_EndWarmupTime;
 int g_BombSiteAIndex;
 int g_BombSiteBIndex;
 bool g_ShowingEditorInformation = true;
 
 /** Forwards **/
-Handle g_hOnGunsCommand = INVALID_HANDLE;
-Handle g_hOnPostRoundEnqueue = INVALID_HANDLE;
-Handle g_hOnPreRoundEnqueue = INVALID_HANDLE;
-Handle g_hOnTeamSizesSet = INVALID_HANDLE;
-Handle g_hOnTeamsSet = INVALID_HANDLE;
-Handle g_OnRoundWon = INVALID_HANDLE;
-Handle g_OnGetSpecialPowers = INVALID_HANDLE;
+Handle g_hOnGunsCommand;
+Handle g_hOnPostRoundEnqueue;
+Handle g_hOnPreRoundEnqueue;
+Handle g_hOnTeamSizesSet;
+Handle g_hOnTeamsSet;
+Handle g_OnRoundWon;
+Handle g_OnGetSpecialPowers;
 
 #include "executes/editor.sp"
 #include "executes/editor_commands.sp"
@@ -344,7 +344,7 @@ public void OnPluginStart() {
 }
 
 public void OnPluginEnd() {
-  if (g_SavedCvars != INVALID_HANDLE) {
+  if (g_SavedCvars != null) {
     RestoreCvars(g_SavedCvars, true);
   }
 }
@@ -403,7 +403,7 @@ public int EnabledChanged(Handle cvar, const char[] oldValue, const char[] newVa
   g_Enabled = !StrEqual(newValue, "0");
 
   if (wasEnabled && !g_Enabled) {
-    if (g_SavedCvars != INVALID_HANDLE)
+    if (g_SavedCvars != null)
       RestoreCvars(g_SavedCvars, true);
 
   } else if (!wasEnabled && g_Enabled) {
@@ -424,7 +424,7 @@ public int EnabledChanged(Handle cvar, const char[] oldValue, const char[] newVa
 }
 
 public void ExecConfigs() {
-  if (g_SavedCvars != INVALID_HANDLE) {
+  if (g_SavedCvars != null) {
     CloseCvarStorage(g_SavedCvars);
   }
   g_SavedCvars = ExecuteAndSaveCvars("sourcemod/executes/executes_game.cfg");
