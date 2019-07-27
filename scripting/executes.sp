@@ -188,9 +188,15 @@ bool g_AllowAWP[MAXPLAYERS + 1];
 Handle g_CZCTSideCookie;
 bool g_CZCTSide[MAXPLAYERS + 1];
 
+Handle g_SCOPECTSideCookie;
+bool g_SCOPECTSide[MAXPLAYERS + 1];
+
 // T
 Handle g_CZTSideCookie;
 bool g_CZTSide[MAXPLAYERS + 1];
+
+Handle g_SCOPETSideCookie;
+bool g_SCOPETSide[MAXPLAYERS + 1];
 
 SitePref g_SitePreference[MAXPLAYERS + 1];
 
@@ -341,6 +347,8 @@ public void OnPluginStart() {
   g_SilencedM4Cookie = RegClientCookie("executes_silencedm4", "", CookieAccess_Private);
   g_CZCTSideCookie = RegClientCookie("executes_cz_ct_side", "", CookieAccess_Private);
   g_CZTSideCookie = RegClientCookie("executes_cz_t_side", "", CookieAccess_Private);
+  g_SCOPECTSideCookie = RegClientCookie("executes_scope_ct_side", "", CookieAccess_Private);
+  g_SCOPETSideCookie = RegClientCookie("executes_scope_t_side", "", CookieAccess_Private);
 }
 
 public void OnPluginEnd() {

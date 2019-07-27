@@ -40,10 +40,10 @@ static void AssignCT(int client, bool helpCT) {
     }
 
   } else {
-    if (Chance(0.02)) {
-      g_PlayerPrimary[client] = "weapon_famas";
-    } else if (Chance(0.002)) {
+    if (g_SCOPECTSide[client] && Chance(0.25)) {
       g_PlayerPrimary[client] = "weapon_aug";
+    } else if (Chance(0.02)) {
+      g_PlayerPrimary[client] = "weapon_famas";
     } else if (Chance(0.0005)) {
       g_PlayerPrimary[client] = "weapon_negev";
     } else if (Chance(0.0005)) {
@@ -143,10 +143,10 @@ static void AssignT(int client, bool hurtT) {
     }
 
   } else {
-    if (Chance(0.02)) {
-      g_PlayerPrimary[client] = "weapon_galilar";
-    } else if (Chance(0.002)) {
+    if (g_SCOPETSide[client] && Chance(0.25)) {
       g_PlayerPrimary[client] = "weapon_sg556";
+    } else if (Chance(0.02)) {
+      g_PlayerPrimary[client] = "weapon_galilar";
     } else if (Chance(0.002)) {
       g_PlayerPrimary[client] = "weapon_m249";
     }

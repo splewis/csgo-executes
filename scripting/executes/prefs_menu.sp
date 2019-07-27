@@ -40,6 +40,18 @@ public void GivePreferencesMenu(int client) {
   }
   menu.AddItem("cz_t", buffer);
 
+  buffer = "Allow receiving Augs: no";
+  if (g_SCOPECTSide[client]) {
+    buffer = "Allow receiving Augs: yes";
+  }
+  menu.AddItem("scope_ct", buffer);
+
+  buffer = "Allow receiving SG 553: no";
+  if (g_SCOPETSide[client]) {
+    buffer = "Allow receiving SG 553: yes";
+  }
+  menu.AddItem("scope_t", buffer);
+
   menu.Display(client, 15);
 }
 
@@ -82,6 +94,16 @@ public int PreferencesMenuHandler(Menu menu, MenuAction action, int param1, int 
       SetCookieBool(client, g_CZTSideCookie, g_CZTSide[client]);
       GivePreferencesMenu(client);
 
+    } else if (StrEqual(choice, "scope_ct")) {
+      g_SCOPECTSide[client] = !g_SCOPECTSide[client];
+      SetCookieBool(client, g_SCOPECTSideCookie, g_SCOPECTSide[client]);
+      GivePreferencesMenu(client);
+
+    } else if (StrEqual(choice, "scope_t")) {
+      g_SCOPETSide[client] = !g_SCOPETSide[client];
+      SetCookieBool(client, g_SCOPETSideCookie, g_SCOPETSide[client]);
+      GivePreferencesMenu(client);
+
     } else {
       LogError("unknown pref string = %s", choice);
     }
@@ -100,6 +122,8 @@ public void OnClientCookiesCached(int client) {
   g_SitePreference[client] = GetSitePrefCookie(client);
   g_CZCTSide[client] = GetCookieBool(client, g_CZCTSideCookie, true);
   g_CZTSide[client] = GetCookieBool(client, g_CZTSideCookie, true);
+  g_SCOPECTSide[client] = GetCookieBool(client, g_SCOPECTSideCookie, true);
+  g_SCOPETSide[client] = GetCookieBool(client, g_SCOPETSideCookie, true);
 }
 
 public void SetSitePrefCookie(int client, SitePref site) {
