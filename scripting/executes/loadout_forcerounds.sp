@@ -83,8 +83,12 @@ static void AssignCT(int client) {
       }
     }
 
-    if (StrEqual(g_PlayerPrimary[client], "weapon_m4a1") && g_SilencedM4[client]) {
-      g_PlayerPrimary[client] = "weapon_m4a1_silencer";
+    if (StrEqual(g_PlayerPrimary[client], "weapon_m4a1")) {
+      if (g_CTRifle[client] == CTRiflePref_Silenced_M4) {
+        g_PlayerPrimary[client] = "weapon_m4a1_silencer";
+      } else if (g_CTRifle[client] == CTRiflePref_Aug) {
+        g_PlayerPrimary[client] = "weapon_aug";
+      }
     }
 
     if (StrEqual(g_LastItemPickup[client], "ak47")) {
@@ -163,5 +167,9 @@ static void AssignT(int client) {
     g_PlayerPrimary[client] = "";
     GiveUpgradedSecondary(client, CS_TEAM_T);
     g_PlayerNades[client] = "f";
+  }
+
+  if (StrEqual(g_PlayerPrimary[client], "weapon_ak47") && g_TRifle[client] == TRiflePref_Sg) {
+    g_PlayerPrimary[client] = "weapon_sg556";
   }
 }

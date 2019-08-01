@@ -4,17 +4,32 @@ public void GivePreferencesMenu(int client) {
 
   menu.SetTitle("Select weapon preferences");
 
-  buffer = "M4 choice: M4A4";
-  if (g_SilencedM4[client])
-    buffer = "M4 choice: M4A1-S";
-  menu.AddItem("silenced_m4", buffer);
+  char choice[32];
+  switch(g_CTRifle[client]) {
+    case CTRiflePref_M4:
+      choice = "M4A4";
+    case CTRiflePref_Silenced_M4:
+      choice = "M4A1-S";
+    case CTRiflePref_Aug:
+      choice = "AUG";
+  }
+  Format(buffer, sizeof(buffer), "CT Rifle choice: %s", choice);
+  menu.AddItem("ct_rifle", buffer);
+
+  switch(g_TRifle[client]) {
+    case TRiflePref_Ak:
+      choice = "AK-47";
+    case TRiflePref_Sg:
+      choice = "SG 553";
+  }
+  Format(buffer, sizeof(buffer), "T Rifle choice: %s", choice);
+  menu.AddItem("t_rifle", buffer);
 
   buffer = "Allow receiving awps: no";
   if (g_AllowAWP[client])
     buffer = "Allow receiving awps: yes";
   menu.AddItem("allow_awp", buffer);
 
-  char choice[8];
   switch (g_SitePreference[client]) {
     case SitePref_A:
       choice = "A";
@@ -40,18 +55,6 @@ public void GivePreferencesMenu(int client) {
   }
   menu.AddItem("cz_t", buffer);
 
-  buffer = "Allow receiving Augs: no";
-  if (g_SCOPECTSide[client]) {
-    buffer = "Allow receiving Augs: yes";
-  }
-  menu.AddItem("scope_ct", buffer);
-
-  buffer = "Allow receiving SG 553: no";
-  if (g_SCOPETSide[client]) {
-    buffer = "Allow receiving SG 553: yes";
-  }
-  menu.AddItem("scope_t", buffer);
-
   menu.Display(client, 15);
 }
 
@@ -61,9 +64,24 @@ public int PreferencesMenuHandler(Menu menu, MenuAction action, int param1, int 
     char choice[64];
     menu.GetItem(param2, choice, sizeof(choice));
 
-    if (StrEqual(choice, "silenced_m4")) {
-      g_SilencedM4[client] = !g_SilencedM4[client];
-      SetCookieBool(client, g_SilencedM4Cookie, g_SilencedM4[client]);
+    if (StrEqual(choice, "ct_rifle")) {
+      if (g_CTRifle[client] == CTRiflePref_M4)
+        g_CTRifle[client] = CTRiflePref_Silenced_M4;
+      else if (g_CTRifle[client] == CTRiflePref_Silenced_M4)
+        g_CTRifle[client] = CTRiflePref_Aug;
+      else if (g_CTRifle[client] == CTRiflePref_Aug)
+        g_CTRifle[client] = CTRiflePref_M4;
+
+      SetCTRiflePrefCookie(client, g_CTRifle[client]);
+      GivePreferencesMenu(client);
+
+    } else if (StrEqual(choice, "t_rifle")) {
+      if (g_TRifle[client] == TRiflePref_Ak)
+        g_TRifle[client] = TRiflePref_Sg;
+      else if (g_TRifle[client] == TRiflePref_Sg)
+        g_TRifle[client] = TRiflePref_Ak;
+
+      SetTRiflePrefCookie(client, g_TRifle[client]);
       GivePreferencesMenu(client);
 
     } else if (StrEqual(choice, "allow_awp")) {
@@ -94,16 +112,6 @@ public int PreferencesMenuHandler(Menu menu, MenuAction action, int param1, int 
       SetCookieBool(client, g_CZTSideCookie, g_CZTSide[client]);
       GivePreferencesMenu(client);
 
-    } else if (StrEqual(choice, "scope_ct")) {
-      g_SCOPECTSide[client] = !g_SCOPECTSide[client];
-      SetCookieBool(client, g_SCOPECTSideCookie, g_SCOPECTSide[client]);
-      GivePreferencesMenu(client);
-
-    } else if (StrEqual(choice, "scope_t")) {
-      g_SCOPETSide[client] = !g_SCOPETSide[client];
-      SetCookieBool(client, g_SCOPETSideCookie, g_SCOPETSide[client]);
-      GivePreferencesMenu(client);
-
     } else {
       LogError("unknown pref string = %s", choice);
     }
@@ -118,12 +126,11 @@ public void OnClientCookiesCached(int client) {
     return;
 
   g_AllowAWP[client] = GetCookieBool(client, g_AllowAWPCookie);
-  g_SilencedM4[client] = GetCookieBool(client, g_SilencedM4Cookie);
   g_SitePreference[client] = GetSitePrefCookie(client);
   g_CZCTSide[client] = GetCookieBool(client, g_CZCTSideCookie, true);
   g_CZTSide[client] = GetCookieBool(client, g_CZTSideCookie, true);
-  g_SCOPECTSide[client] = GetCookieBool(client, g_SCOPECTSideCookie, true);
-  g_SCOPETSide[client] = GetCookieBool(client, g_SCOPETSideCookie, true);
+  g_CTRifle[client] = GetCTRiflePrefCookie(client);
+  g_TRifle[client] = GetTRiflePrefCookie(client);
 }
 
 public void SetSitePrefCookie(int client, SitePref site) {
@@ -140,4 +147,20 @@ public SitePref GetSitePrefCookie(int client) {
   char cookieName[128];
   Format(cookieName, sizeof(cookieName), "exec_%s_ct_site", mapName);
   return view_as<SitePref>(GetCookieIntByName(client, cookieName));
+}
+
+public CTRiflePref GetCTRiflePrefCookie(int client) {
+  return view_as<CTRiflePref>(GetCookieIntByName(client, "executes_ct_rifle"));
+}
+
+public TRiflePref GetTRiflePrefCookie(int client) {
+  return view_as<TRiflePref>(GetCookieIntByName(client, "executes_t_rifle"));
+}
+
+public void SetCTRiflePrefCookie(int client, CTRiflePref pref) {
+  SetCookieIntByName(client, "executes_ct_rifle", view_as<int>(pref));
+}
+
+public void SetTRiflePrefCookie(int client, TRiflePref pref) {
+  SetCookieIntByName(client, "executes_t_rifle", view_as<int>(pref));
 }

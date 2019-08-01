@@ -27,6 +27,17 @@ enum StratType {
   StratType_ForceBuy = 2,
 };
 
+enum CTRiflePref {
+  CTRiflePref_M4 = 0,
+  CTRiflePref_Silenced_M4 = 1,
+  CTRiflePref_Aug = 2,
+}
+
+enum TRiflePref {
+  TRiflePref_Ak = 0,
+  TRiflePref_Sg = 1,
+}
+
 // Most spawn flags only apply to gun rounds typically.
 #define SPAWNFLAG_MOLOTOV (1 << 0)
 #define SPAWNFLAG_MAG7 (1 << 1)     // CT only
