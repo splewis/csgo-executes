@@ -160,8 +160,4 @@ static void AssignT(int client) {
     GiveUpgradedSecondary(client, CS_TEAM_T);
     g_PlayerNades[client] = "f";
   }
-
-  if (StrEqual(g_PlayerPrimary[client], "weapon_ak47") && g_TRifle[client] == TRiflePref_Sg) {
-    g_PlayerPrimary[client] = "weapon_sg556";
-  }
 }
