@@ -42,7 +42,24 @@ public char RandomNade() {
   }
 }
 
-//
+public void GivePrimaryRifle(int client, int team) {
+  if (team == CS_TEAM_CT) {
+    if (g_CTRifle[client] == CTRiflePref_M4) {
+      g_PlayerPrimary[client] = "weapon_m4a1";
+    } else if (g_CTRifle[client] == CTRiflePref_Silenced_M4) {
+      g_PlayerPrimary[client] = "weapon_m4a1_silencer";
+    } else {
+      g_PlayerPrimary[client] = "weapon_aug";
+    }
+  } else {
+    if (g_TRifle[client] == TRiflePref_Ak) {
+      g_PlayerPrimary[client] = "weapon_ak47";
+    } else {
+      g_PlayerPrimary[client] = "weapon_sg556";
+    }
+  }
+}
+
 public void GiveUpgradedSecondary(int client, int team) {
   if (team == CS_TEAM_CT) {
     if (g_CZCTSide[client]) {

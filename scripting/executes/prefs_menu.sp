@@ -158,9 +158,9 @@ public TRiflePref GetTRiflePrefCookie(int client) {
 }
 
 public void SetCTRiflePrefCookie(int client, CTRiflePref pref) {
-  SetCookieIntByName(client, "executes_ct_rifle", view_as<int>(pref));
+  SetCookieInt(client, g_CTRiflePrefCookie, view_as<int>(pref));
 }
 
 public void SetTRiflePrefCookie(int client, TRiflePref pref) {
-  SetCookieIntByName(client, "executes_t_rifle", view_as<int>(pref));
+  SetCookieInt(client, g_TRiflePrefCookie, view_as<int>(pref));
 }

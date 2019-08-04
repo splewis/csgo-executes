@@ -178,17 +178,32 @@ int g_NumT;
 int g_ActivePlayers;
 bool g_RoundSpawnsDecided;  // spawns are lazily decided on the first player spawn event
 
+enum CTRiflePref {
+  CTRiflePref_M4 = 0,
+  CTRiflePref_Silenced_M4 = 1,
+  CTRiflePref_Aug = 2,
+};
+
+enum TRiflePref {
+  TRiflePref_Ak = 0,
+  TRiflePref_Sg = 1,
+};
+
 Handle g_AllowAWPCookie;
 bool g_AllowAWP[MAXPLAYERS + 1];
 
 // CT
 Handle g_CZCTSideCookie;
 bool g_CZCTSide[MAXPLAYERS + 1];
+
+Handle g_CTRiflePrefCookie;
 CTRiflePref g_CTRifle[MAXPLAYERS + 1];
 
 // T
 Handle g_CZTSideCookie;
 bool g_CZTSide[MAXPLAYERS + 1];
+
+Handle g_TRiflePrefCookie;
 TRiflePref g_TRifle[MAXPLAYERS + 1];
 
 SitePref g_SitePreference[MAXPLAYERS + 1];
@@ -339,6 +354,9 @@ public void OnPluginStart() {
   g_AllowAWPCookie = RegClientCookie("executes_awpchoice", "", CookieAccess_Private);
   g_CZCTSideCookie = RegClientCookie("executes_cz_ct_side", "", CookieAccess_Private);
   g_CZTSideCookie = RegClientCookie("executes_cz_t_side", "", CookieAccess_Private);
+  g_CTRiflePrefCookie = RegClientCookie("executes_ct_rifle", "", CookieAccess_Private);
+  g_TRiflePrefCookie = RegClientCookie("executes_t_rifle", "", CookieAccess_Private);
+
 }
 
 public void OnPluginEnd() {
@@ -730,22 +748,8 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
   }
 
   if (!g_EditMode && InWarmup()) {
-    if (GetClientTeam(client) == CS_TEAM_T) {
-      if (g_TRifle[client] == TRiflePref_Ak) {
-        GivePlayerItem(client, "weapon_ak47");
-      } else {
-        GivePlayerItem(client, "weapon_sg556");
-      }
-    } else if (GetClientTeam(client) == CS_TEAM_CT) {
-      if (g_CTRifle[client] == CTRiflePref_M4) {
-        GivePlayerItem(client, "weapon_m4a1");
-      } else if (g_CTRifle[client] == CTRiflePref_Silenced_M4) {
-        GivePlayerItem(client, "weapon_m4a1_silencer");
-      } else {
-        GivePlayerItem(client, "weapon_aug");
-      }
-    }
-
+    GivePrimaryRifle(client, GetClientTeam(client));
+    GivePlayerItem(client, g_PlayerPrimary[client]);
     Client_SetArmor(client, 100);
     SetEntProp(client, Prop_Send, "m_bHasHelmet", true);
   }
@@ -1094,13 +1098,7 @@ public void UpdateTeams() {
     if (IsValidClient(client)) {
       SwitchPlayerTeam(client, CS_TEAM_T);
       g_Team[client] = CS_TEAM_T;
-
-      if (g_TRifle[client] == TRiflePref_Ak) {
-        g_PlayerPrimary[client] = "weapon_ak47";
-      } else {
-        g_PlayerPrimary[client] = "weapon_sg556";
-      }
-
+      GivePrimaryRifle(client, CS_TEAM_T);
       g_PlayerSecondary[client] = "weapon_glock";
       g_PlayerNades[client] = "";
       g_PlayerKit[client] = false;
@@ -1115,15 +1113,10 @@ public void UpdateTeams() {
     if (IsValidClient(client)) {
       SwitchPlayerTeam(client, CS_TEAM_CT);
       g_Team[client] = CS_TEAM_CT;
-
       if (StrEqual(g_LastItemPickup[client], "ak47")) {
         g_PlayerPrimary[client] = "weapon_ak47";
-      } else if (g_CTRifle[client] == CTRiflePref_M4) {
-        g_PlayerPrimary[client] = "weapon_m4a1";
-      } else if (g_CTRifle[client] == CTRiflePref_Silenced_M4) {
-        g_PlayerPrimary[client] = "weapon_m4a1_silencer";
       } else {
-        g_PlayerPrimary[client] = "weapon_aug";
+        GivePrimaryRifle(client, CS_TEAM_CT);
       }
 
       g_PlayerSecondary[client] = "weapon_hkp2000";

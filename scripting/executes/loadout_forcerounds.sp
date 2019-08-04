@@ -34,7 +34,7 @@ static void AssignCT(int client) {
       AssignRandomNades(client, 2);
 
     } else if (f < 0.4) {
-      g_PlayerPrimary[client] = "weapon_m4a1";
+      GivePrimaryRifle(client, CS_TEAM_CT);
       AssignRandomNades(client, 0);
 
     } else if (f < 0.5) {
@@ -80,14 +80,6 @@ static void AssignCT(int client) {
       g_PlayerPrimary[client] = "weapon_mag7";
       if (Chance(0.1)) {
         g_PlayerPrimary[client] = "weapon_p90";
-      }
-    }
-
-    if (StrEqual(g_PlayerPrimary[client], "weapon_m4a1")) {
-      if (g_CTRifle[client] == CTRiflePref_Silenced_M4) {
-        g_PlayerPrimary[client] = "weapon_m4a1_silencer";
-      } else if (g_CTRifle[client] == CTRiflePref_Aug) {
-        g_PlayerPrimary[client] = "weapon_aug";
       }
     }
 
@@ -144,10 +136,10 @@ static void AssignCTNades(int client, int spawn) {
 static void AssignT(int client) {
   float f = GetRandomFloat();
   if (f < 0.1) {
-    g_PlayerPrimary[client] = "weapon_ak47";
+    GivePrimaryRifle(client, CS_TEAM_T);
     g_PlayerNades[client] = "f";
   } else if (f < 0.3) {
-    g_PlayerPrimary[client] = "weapon_ak47";
+    GivePrimaryRifle(client, CS_TEAM_T);
     g_PlayerNades[client] = "";
 
   } else if (f < 0.35) {
