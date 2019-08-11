@@ -748,7 +748,7 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
   }
 
   if (!g_EditMode && InWarmup()) {
-    GivePrimaryRifle(client, GetClientTeam(client));
+    SetPrimaryRifle(client, GetClientTeam(client));
     GivePlayerItem(client, g_PlayerPrimary[client]);
     Client_SetArmor(client, 100);
     SetEntProp(client, Prop_Send, "m_bHasHelmet", true);
@@ -1098,7 +1098,7 @@ public void UpdateTeams() {
     if (IsValidClient(client)) {
       SwitchPlayerTeam(client, CS_TEAM_T);
       g_Team[client] = CS_TEAM_T;
-      GivePrimaryRifle(client, CS_TEAM_T);
+      SetPrimaryRifle(client, CS_TEAM_T);
       g_PlayerSecondary[client] = "weapon_glock";
       g_PlayerNades[client] = "";
       g_PlayerKit[client] = false;
@@ -1116,7 +1116,7 @@ public void UpdateTeams() {
       if (StrEqual(g_LastItemPickup[client], "ak47")) {
         g_PlayerPrimary[client] = "weapon_ak47";
       } else {
-        GivePrimaryRifle(client, CS_TEAM_CT);
+        SetPrimaryRifle(client, CS_TEAM_CT);
       }
 
       g_PlayerSecondary[client] = "weapon_hkp2000";

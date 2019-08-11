@@ -34,7 +34,7 @@ static void AssignCT(int client) {
       AssignRandomNades(client, 2);
 
     } else if (f < 0.4) {
-      GivePrimaryRifle(client, CS_TEAM_CT);
+      SetPrimaryRifle(client, CS_TEAM_CT);
       AssignRandomNades(client, 0);
 
     } else if (f < 0.5) {
@@ -136,10 +136,10 @@ static void AssignCTNades(int client, int spawn) {
 static void AssignT(int client) {
   float f = GetRandomFloat();
   if (f < 0.1) {
-    GivePrimaryRifle(client, CS_TEAM_T);
+    SetPrimaryRifle(client, CS_TEAM_T);
     g_PlayerNades[client] = "f";
   } else if (f < 0.3) {
-    GivePrimaryRifle(client, CS_TEAM_T);
+    SetPrimaryRifle(client, CS_TEAM_T);
     g_PlayerNades[client] = "";
 
   } else if (f < 0.35) {

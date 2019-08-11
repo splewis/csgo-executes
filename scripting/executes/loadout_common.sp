@@ -42,7 +42,7 @@ public char RandomNade() {
   }
 }
 
-public void GivePrimaryRifle(int client, int team) {
+public void SetPrimaryRifle(int client, int team) {
   if (team == CS_TEAM_CT) {
     if (g_CTRifle[client] == CTRiflePref_M4) {
       g_PlayerPrimary[client] = "weapon_m4a1";
