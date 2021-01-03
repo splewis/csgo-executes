@@ -37,7 +37,7 @@ Some important cvars:
 
 #### Creating Executes and Spawns
 
-**No default spawns or executes are provided.** You must launch the editor and add them yourself. It's kind of hard to work with, so feel free to submit a [pull request](https://github.com/splewis/csgo-executes/pulls) to make it better.
+The plugin now comes with some default spawn configs, but you are **strongly recommended** to create your own. The provides spawns are likely quite out of date (some grenades may not even work) and may reflect a poor variety of executes that don't represent the current meta. 
 
 ``!edit``: launches the editor, opens the edit menu. You will use this a lot
 ``!setname``: sets the name of the spawn/execute being edited
