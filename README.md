@@ -3,10 +3,6 @@ csgo-executes
 
 [![Build status](http://ci.splewis.net/job/csgo-executes/badge/icon)](http://ci.splewis.net/job/csgo-executes/)
 
-**Status: Experimental, unsupported.**
-
-Warning: there's no backwards compatibility guarantees for spawn files yet. Use this at your own risk. Expect bugs and crashes.
-
 ## Gameplay
 
 The T team setup to execute onto a site with ~40 seconds left and the CT team is typically in a fairly standard setup. Grenades are automatically thrown for the T players and the rounds plays out the way counter-strike plays. The game goes through pistol rounds, forcebuy/lowbuy rounds, then standard gun rounds. Players can use the ``guns`` menu to select some preferences: whether they want to have an AWP, which M4 to use, and what site they prefer to play on the CT side.
