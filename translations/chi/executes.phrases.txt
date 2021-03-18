@@ -2,7 +2,7 @@
 {
 	"JoinedQueueMessage"
 	{
-		"chi"			"您已被放置在等待队列中。""
+		"chi"			"您已被放置在等待队列中。"
 	}
 	"WaitingQueueMessage"
 	{
