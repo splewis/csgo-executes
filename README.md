@@ -2,6 +2,7 @@ csgo-executes
 =============
 
 [![Build status](http://ci.splewis.net/job/csgo-executes/badge/icon)](http://ci.splewis.net/job/csgo-executes/)
+[![Discord Chat](https://img.shields.io/discord/926309849673895966.svg)](https://discord.gg/)
 
 ## Gameplay
 
@@ -64,6 +65,9 @@ Other notes:
 
 There is a significant amount of bad code and TODOs - 95% of this was written in a few days. Cleaning those problems up is appreciated.
 
+### Discord Chat
+
+A [Discord](https://discord.gg/zmqEa4keCk) channel is available for general discussion.
 
 #### Known issues and limitations
 
