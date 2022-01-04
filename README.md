@@ -2,7 +2,7 @@ csgo-executes
 =============
 
 [![Build status](http://ci.splewis.net/job/csgo-executes/badge/icon)](http://ci.splewis.net/job/csgo-executes/)
-[![Discord Chat](https://img.shields.io/discord/926309849673895966.svg)](https://discord.gg/)
+[![Discord Chat](https://img.shields.io/discord/926309849673895966.svg)](https://discord.gg/zmqEa4keCk)
 
 ## Gameplay
 
