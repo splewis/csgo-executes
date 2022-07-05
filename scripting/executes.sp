@@ -789,7 +789,7 @@ public Action Event_DamageDealt(Event event, const char[] name, bool dontBroadca
 
   int attacker = GetClientOfUserId(event.GetInt("attacker"));
   int victim = GetClientOfUserId(event.GetInt("userid"));
-  int damage = event.GetInt("dmg_PlayerHealth");
+  int damage = event.GetInt("dmg_health");
 
   bool validAttacker = IsValidClient(attacker);
   bool validVictim = IsValidClient(victim);
