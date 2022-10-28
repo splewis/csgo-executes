@@ -193,15 +193,15 @@ Handle g_AllowAWPCookie;
 bool g_AllowAWP[MAXPLAYERS + 1];
 
 // CT
-Handle g_CZCTSideCookie;
-bool g_CZCTSide[MAXPLAYERS + 1];
+Handle g_DFCTSideCookie; // DF -> Deagle Fiveseven
+bool g_DFCTSide[MAXPLAYERS + 1];
 
 Handle g_CTRiflePrefCookie;
 CTRiflePref g_CTRifle[MAXPLAYERS + 1];
 
 // T
-Handle g_CZTSideCookie;
-bool g_CZTSide[MAXPLAYERS + 1];
+Handle g_DTTSideCookie; // DT -> Deagle Tec9
+bool g_DTTSide[MAXPLAYERS + 1];
 
 Handle g_TRiflePrefCookie;
 TRiflePref g_TRifle[MAXPLAYERS + 1];
@@ -352,8 +352,8 @@ public void OnPluginStart() {
   }
 
   g_AllowAWPCookie = RegClientCookie("executes_awpchoice", "", CookieAccess_Private);
-  g_CZCTSideCookie = RegClientCookie("executes_cz_ct_side", "", CookieAccess_Private);
-  g_CZTSideCookie = RegClientCookie("executes_cz_t_side", "", CookieAccess_Private);
+  g_DFCTSideCookie = RegClientCookie("executes_df_ct_side", "", CookieAccess_Private);
+  g_DTTSideCookie = RegClientCookie("executes_dt_t_side", "", CookieAccess_Private);
   g_CTRiflePrefCookie = RegClientCookie("executes_ct_rifle", "", CookieAccess_Private);
   g_TRiflePrefCookie = RegClientCookie("executes_t_rifle", "", CookieAccess_Private);
 

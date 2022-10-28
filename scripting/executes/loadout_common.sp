@@ -62,14 +62,14 @@ public void SetPrimaryRifle(int client, int team) {
 
 public void GiveUpgradedSecondary(int client, int team) {
   if (team == CS_TEAM_CT) {
-    if (g_CZCTSide[client]) {
-      g_PlayerSecondary[client] = "weapon_cz75a";
+    if (g_DFCTSide[client]) {
+      g_PlayerSecondary[client] = "weapon_deagle";
     } else {
       g_PlayerSecondary[client] = "weapon_fiveseven";
     }
   } else {
-    if (g_CZTSide[client]) {
-      g_PlayerSecondary[client] = "weapon_cz75a";
+    if (g_DTTSide[client]) {
+      g_PlayerSecondary[client] = "weapon_deagle";
     } else {
       g_PlayerSecondary[client] = "weapon_tec9";
     }

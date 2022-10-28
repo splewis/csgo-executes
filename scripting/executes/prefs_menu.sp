@@ -43,17 +43,17 @@ public void GivePreferencesMenu(int client) {
   Format(buffer, sizeof(buffer), "CT site preference: %s", choice);
   menu.AddItem("site_pref", buffer);
 
-  buffer = "CZ/Five-Seven choice: Five-Seven";
-  if (g_CZCTSide[client]) {
-    buffer = "CZ/Five-Seven choice: CZ";
+  buffer = "Deagle/Five-Seven choice: Five-Seven";
+  if (g_DFCTSide[client]) {
+    buffer = "Deagle/Five-Seven choice: Deagle";
   }
-  menu.AddItem("cz_ct", buffer);
+  menu.AddItem("df_ct", buffer);
 
-  buffer = "CZ/Tec9 choice: Tec9";
-  if (g_CZTSide[client]) {
-    buffer = "CZ/Tec9 choice: CZ";
+  buffer = "Deagle/Tec9 choice: Tec9";
+  if (g_DTTSide[client]) {
+    buffer = "Deagle/Tec9 choice: Deagle";
   }
-  menu.AddItem("cz_t", buffer);
+  menu.AddItem("dt_t", buffer);
 
   menu.Display(client, 15);
 }
@@ -102,14 +102,14 @@ public int PreferencesMenuHandler(Menu menu, MenuAction action, int param1, int 
       SetSitePrefCookie(client, g_SitePreference[client]);
       GivePreferencesMenu(client);
 
-    } else if (StrEqual(choice, "cz_ct")) {
-      g_CZCTSide[client] = !g_CZCTSide[client];
-      SetCookieBool(client, g_CZCTSideCookie, g_CZCTSide[client]);
+    } else if (StrEqual(choice, "df_ct")) {
+      g_DFCTSide[client] = !g_DFCTSide[client];
+      SetCookieBool(client, g_DFCTSideCookie, g_DFCTSide[client]);
       GivePreferencesMenu(client);
 
-    } else if (StrEqual(choice, "cz_t")) {
-      g_CZTSide[client] = !g_CZTSide[client];
-      SetCookieBool(client, g_CZTSideCookie, g_CZTSide[client]);
+    } else if (StrEqual(choice, "dt_t")) {
+      g_DTTSide[client] = !g_DTTSide[client];
+      SetCookieBool(client, g_DTTSideCookie, g_DTTSide[client]);
       GivePreferencesMenu(client);
 
     } else {
@@ -127,8 +127,8 @@ public void OnClientCookiesCached(int client) {
 
   g_AllowAWP[client] = GetCookieBool(client, g_AllowAWPCookie);
   g_SitePreference[client] = GetSitePrefCookie(client);
-  g_CZCTSide[client] = GetCookieBool(client, g_CZCTSideCookie, true);
-  g_CZTSide[client] = GetCookieBool(client, g_CZTSideCookie, true);
+  g_DFCTSide[client] = GetCookieBool(client, g_DFCTSideCookie, true);
+  g_DTTSide[client] = GetCookieBool(client, g_DTTSideCookie, true);
   g_CTRifle[client] = GetCTRiflePrefCookie(client);
   g_TRifle[client] = GetTRiflePrefCookie(client);
 }
