@@ -10,13 +10,13 @@ public void ForceRounds_Assign(ArrayList tPlayers, ArrayList ctPlayers, Bombsite
 
 static void AssignCT(int client) {
   int spawn = g_SpawnIndices[client];
-  g_PlayerHelmet[client] = true;
-  g_PlayerKit[client] = true;
+  g_PlayerHelmet[client] = Chance(0.5);
+  g_PlayerKit[client] = Chance(0.6);
 
   AssignCTNades(client, spawn);
 
   if (client == g_CTAwper) {
-    g_PlayerPrimary[client] = "weapon_awp";
+    g_PlayerPrimary[client] = "weapon_ssg08";
     g_PlayerSecondary[client] = "weapon_p250";
 
   } else {
@@ -30,7 +30,7 @@ static void AssignCT(int client) {
       AssignRandomNades(client, 2);
 
     } else if (f < 0.3) {
-      g_PlayerPrimary[client] = "weapon_mp7";
+      g_PlayerSecondary[client] = "weapon_deagle";
       AssignRandomNades(client, 2);
 
     } else if (f < 0.4) {
@@ -42,16 +42,16 @@ static void AssignCT(int client) {
       AssignRandomNades(client, 2);
 
     } else if (f < 0.6) {
-      g_PlayerPrimary[client] = "weapon_famas";
+      GiveUpgradedSecondary(client, CS_TEAM_CT);
       AssignRandomNades(client, 1);
 
     } else if (f < 0.7) {
-      g_PlayerPrimary[client] = "weapon_ump45";
-      AssignRandomNades(client, 1);
+      g_PlayerPrimary[client] = "weapon_famas";
+      AssignRandomNades(client, 2);
 
     } else if (f < 0.8) {
-      g_PlayerPrimary[client] = "weapon_ump45";
-      AssignRandomNades(client, 2);
+      g_PlayerPrimary[client] = "weapon_famas";
+      AssignRandomNades(client, 3);
     } else if (f < 0.87) {
       g_PlayerPrimary[client] = "weapon_p90";
       AssignRandomNades(client, 1);
@@ -66,7 +66,7 @@ static void AssignCT(int client) {
       f = GetRandomFloat();
       if (f < 0.55) {
         g_PlayerPrimary[client] = "weapon_ump45";
-        AssignRandomNades(client, 2);
+        AssignRandomNades(client, 1);
       } else if (f < 0.7) {
         g_PlayerPrimary[client] = "weapon_p90";
         AssignRandomNades(client, 0);
@@ -144,10 +144,10 @@ static void AssignT(int client) {
 
   } else if (f < 0.35) {
     g_PlayerPrimary[client] = "weapon_galilar";
-    g_PlayerNades[client] = "m";
+    g_PlayerNades[client] = "mi";
 
   } else if (f < 0.5) {
-    g_PlayerPrimary[client] = "weapon_ump45";
+    g_PlayerPrimary[client] = "weapon_galilar";
     g_PlayerNades[client] = "f";
 
   } else if (f < 0.8) {
