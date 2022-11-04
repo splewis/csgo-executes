@@ -654,7 +654,7 @@ public void EndWarmup() {
                         g_hMinPlayers.IntValue);
   ServerCommand("mp_death_drop_gun 1");
   ServerCommand("mp_warmup_pausetimer 0");
-  ServerCommand("mp_warmuptime 10");
+  ServerCommand("mp_warmuptime 5");
 }
 
 public Action Command_Drop(int client, const char[] command, int argc) {
@@ -690,7 +690,7 @@ public Action Event_PlayerTeam(Event event, const char[] name, bool dontBroadcas
     return Plugin_Continue;
   }
 
-  SetEventBroadcast(event, true);
+  SetEventBool(event, "silent", true);
   return Plugin_Continue;
 }
 
