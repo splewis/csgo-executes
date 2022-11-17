@@ -395,6 +395,10 @@ public void GrenadeTypeName(GrenadeType grenadeType, char[] buf, int len) {
       Format(buf, len, "flash");
     case GrenadeType_Molotov:
       Format(buf, len, "molotov");
+    case GrenadeType_HE:
+      Format(buf, len, "he");
+    case GrenadeType_Decoy:
+      Format(buf, len, "decoy");
     default:
       Format(buf, len, "none");
   }
