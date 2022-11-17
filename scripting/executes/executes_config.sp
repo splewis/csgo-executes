@@ -109,6 +109,10 @@ static void ReadSpawns(KeyValues spawnsKv) {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_Flash;
     } else if (StrEqual(buffer, "molotov")) {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_Molotov;
+    } else if (StrEqual(buffer, "he")) {
+      g_SpawnGrenadeTypes[spawn] = GrenadeType_HE;
+    } else if (StrEqual(buffer, "decoy")) {
+      g_SpawnGrenadeTypes[spawn] = GrenadeType_Decoy;
     } else {
       g_SpawnGrenadeTypes[spawn] = GrenadeType_None;
     }
